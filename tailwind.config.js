@@ -1,0 +1,106 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // NOTE: Update this to include the paths to all files that contain Nativewind classes.
+  content: [
+    "./App.tsx",
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+  ],
+  presets: [require("nativewind/preset")],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        // Nature-inspired primary palette
+        primary: {
+          50: "#f0fdf4",
+          100: "#dcfce7",
+          200: "#bbf7d0",
+          300: "#86efac",
+          400: "#4ade80",
+          500: "#22c55e",
+          600: "#16a34a",
+          700: "#15803d",
+          800: "#166534",
+          900: "#14532d",
+        },
+        // Earth tones for secondary elements
+        earth: {
+          50: "#fefdf8",
+          100: "#fef7e0",
+          200: "#fdecc8",
+          300: "#fbd38d",
+          400: "#f6ad55",
+          500: "#ed8936",
+          600: "#dd6b20",
+          700: "#c05621",
+          800: "#9c4221",
+          900: "#7b341e",
+        },
+        // Soil and field colors
+        soil: {
+          50: "#fafaf9",
+          100: "#f5f5f4",
+          200: "#e7e5e4",
+          300: "#d6d3d1",
+          400: "#a8a29e",
+          500: "#78716c",
+          600: "#57534e",
+          700: "#44403c",
+          800: "#292524",
+          900: "#1c1917",
+        },
+        // Crop-specific colors
+        crop: {
+          wheat: "#f4a261",
+          tomato: "#e63946",
+          olive: "#2a9d8f",
+          corn: "#ffd166",
+          rice: "#06d6a0",
+          soybean: "#118ab2",
+          carrot: "#ff6b35",
+          lettuce: "#8fbc8f",
+          potato: "#dda0dd",
+        },
+        // Status colors
+        success: {
+          50: "#f0fdf4",
+          100: "#dcfce7",
+          200: "#bbf7d0",
+          300: "#86efac",
+          400: "#4ade80",
+          500: "#22c55e",
+          600: "#16a34a",
+          700: "#15803d",
+          800: "#166534",
+          900: "#14532d",
+        },
+        warning: {
+          50: "#fffbeb",
+          100: "#fef3c7",
+          200: "#fde68a",
+          300: "#fcd34d",
+          400: "#fbbf24",
+          500: "#f59e0b",
+          600: "#d97706",
+          700: "#b45309",
+          800: "#92400e",
+          900: "#78350f",
+        },
+        error: {
+          50: "#fef2f2",
+          100: "#fee2e2",
+          200: "#fecaca",
+          300: "#fca5a5",
+          400: "#f87171",
+          500: "#ef4444",
+          600: "#dc2626",
+          700: "#b91c1c",
+          800: "#991b1b",
+          900: "#7f1d1d",
+        },
+      },
+    },
+  },
+  plugins: [],
+};
