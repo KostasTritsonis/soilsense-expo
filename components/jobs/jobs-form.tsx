@@ -2,9 +2,14 @@ import { useLoadingStore } from "@/lib/loading-store";
 import { useJobsStore } from "@/lib/stores/jobs-store";
 import { JobFormData } from "@/lib/types";
 import React, { useState } from "react";
-import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import ButtonLoader from "../button-loader";
-import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 
 type JobFormProps = {
@@ -79,23 +84,17 @@ export default function JobForm({ onCancel }: JobFormProps) {
 
   return (
     <ThemedView className="bg-white/90 rounded-3xl shadow-sm border border-white/60 p-6 md:p-8">
-      <ThemedText
-        type="defaultSemiBold"
-        className="text-xl md:text-2xl font-semibold text-neutral-900 mb-6"
-      >
+      <Text className="text-xl md:text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6">
         Create New Job
-      </ThemedText>
+      </Text>
 
       <ScrollView className="space-y-6">
         {/* Basic Information */}
         <View className="space-y-4">
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Job Title *
-            </ThemedText>
+            </Text>
             <TextInput
               value={formData.title}
               onChangeText={(value) => handleInputChange("title", value)}
@@ -106,12 +105,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
           </View>
 
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Description
-            </ThemedText>
+            </Text>
             <TextInput
               value={formData.description}
               onChangeText={(value) => handleInputChange("description", value)}
@@ -131,12 +127,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
         {/* Location and Assignment */}
         <View className="space-y-4">
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Location
-            </ThemedText>
+            </Text>
             <TextInput
               value={formData.location || ""}
               onChangeText={(value) => handleInputChange("location", value)}
@@ -147,12 +140,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
           </View>
 
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Assigned To
-            </ThemedText>
+            </Text>
             <View className="flex-row gap-2">
               <TouchableOpacity
                 onPress={() => handleInputChange("assignedToId", "")}
@@ -162,14 +152,15 @@ export default function JobForm({ onCancel }: JobFormProps) {
                     : "bg-white border-neutral-300"
                 }`}
               >
-                <ThemedText
-                  type="default"
+                <Text
                   className={`text-sm text-center font-medium ${
-                    !formData.assignedToId ? "text-white" : "text-neutral-700"
+                    !formData.assignedToId
+                      ? "text-white"
+                      : "text-neutral-700 dark:text-neutral-300"
                   }`}
                 >
                   Not Assigned
-                </ThemedText>
+                </Text>
               </TouchableOpacity>
               {users.map((user) => (
                 <TouchableOpacity
@@ -181,16 +172,15 @@ export default function JobForm({ onCancel }: JobFormProps) {
                       : "bg-white border-neutral-300"
                   }`}
                 >
-                  <ThemedText
-                    type="default"
+                  <Text
                     className={`text-sm text-center font-medium ${
                       formData.assignedToId === user.id
                         ? "text-white"
-                        : "text-neutral-700"
+                        : "text-neutral-700 dark:text-neutral-300"
                     }`}
                   >
                     {user.name}
-                  </ThemedText>
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -200,12 +190,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
         {/* Dates and Status */}
         <View className="space-y-4">
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Start Date *
-            </ThemedText>
+            </Text>
             <TextInput
               value={formData.startDate.toISOString().split("T")[0]}
               onChangeText={(value) => handleInputChange("startDate", value)}
@@ -216,12 +203,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
           </View>
 
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               End Date *
-            </ThemedText>
+            </Text>
             <TextInput
               value={formData.endDate.toISOString().split("T")[0]}
               onChangeText={(value) => handleInputChange("endDate", value)}
@@ -232,12 +216,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
           </View>
 
           <View>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-700 mb-2"
-            >
+            <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Status
-            </ThemedText>
+            </Text>
             <View className="flex-row gap-2">
               {(["Ongoing", "Due", "Completed"] as const).map((status) => (
                 <TouchableOpacity
@@ -249,16 +230,15 @@ export default function JobForm({ onCancel }: JobFormProps) {
                       : "bg-white border-neutral-300"
                   }`}
                 >
-                  <ThemedText
-                    type="default"
+                  <Text
                     className={`text-sm text-center font-medium ${
                       formData.status === status
                         ? "text-white"
-                        : "text-neutral-700"
+                        : "text-neutral-700 dark:text-neutral-300"
                     }`}
                   >
                     {status}
-                  </ThemedText>
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -272,9 +252,9 @@ export default function JobForm({ onCancel }: JobFormProps) {
             className="px-6 py-3 border border-neutral-300 rounded-2xl"
             disabled={isSubmitting}
           >
-            <ThemedText type="default" className="text-neutral-700 font-medium">
+            <Text className="text-neutral-700 dark:text-neutral-300 font-medium">
               Cancel
-            </ThemedText>
+            </Text>
           </TouchableOpacity>
           <ButtonLoader
             isLoading={isSubmitting}

@@ -1,7 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, TouchableOpacity, View } from "react-native";
 
 type MapControlsProps = {
   onReset: () => void;
@@ -30,9 +29,7 @@ export default function MapControls({
         }`}
       >
         <MaterialIcons name="refresh" size={20} color="white" />
-        <ThemedText type="defaultSemiBold" className="text-white font-semibold">
-          Reset Map
-        </ThemedText>
+        <Text className="text-white font-semibold">Reset Map</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -47,22 +44,12 @@ export default function MapControls({
         {isSaving ? (
           <>
             <MaterialIcons name="refresh" size={20} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white font-semibold"
-            >
-              Creating...
-            </ThemedText>
+            <Text className="text-white font-semibold">Creating...</Text>
           </>
         ) : (
           <>
             <MaterialIcons name="save" size={20} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white font-semibold"
-            >
-              Create/Save Fields
-            </ThemedText>
+            <Text className="text-white font-semibold">Create/Save Fields</Text>
           </>
         )}
       </TouchableOpacity>
@@ -77,22 +64,12 @@ export default function MapControls({
         {isLoading ? (
           <>
             <MaterialIcons name="refresh" size={20} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white font-semibold"
-            >
-              Loading...
-            </ThemedText>
+            <Text className="text-white font-semibold">Loading...</Text>
           </>
         ) : (
           <>
             <MaterialIcons name="upload" size={20} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white font-semibold"
-            >
-              Load Fields
-            </ThemedText>
+            <Text className="text-white font-semibold">Load Fields</Text>
           </>
         )}
       </TouchableOpacity>

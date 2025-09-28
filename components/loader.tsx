@@ -1,6 +1,5 @@
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
-import { ThemedText } from "./themed-text";
+import { ActivityIndicator, Text, View } from "react-native";
 
 // Regular loader component for buttons and small areas
 export default function Loader({
@@ -23,9 +22,9 @@ export default function Loader({
         color="#2563eb" // primary-600
       />
       {text && (
-        <ThemedText type="default" className="ml-2 text-sm text-neutral-600">
+        <Text className="ml-2 text-sm text-neutral-600 dark:text-neutral-400">
           {text}
-        </ThemedText>
+        </Text>
       )}
     </View>
   );
@@ -38,20 +37,15 @@ export function FullScreenLoader({ text = "SoilSense" }: { text?: string }) {
       {/* Logo and Brand */}
       <View className="flex-row items-center gap-4">
         <View className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-3xl flex items-center justify-center shadow-md">
-          <ThemedText type="title" className="text-white font-bold text-2xl">
-            S
-          </ThemedText>
+          <Text className="text-white font-bold text-2xl">S</Text>
         </View>
         <View className="items-center">
-          <ThemedText
-            type="title"
-            className="text-3xl font-bold text-neutral-900"
-          >
+          <Text className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
             {text}
-          </ThemedText>
-          <ThemedText type="default" className="text-base text-neutral-500">
+          </Text>
+          <Text className="text-base text-neutral-500 dark:text-neutral-400">
             Agricultural Intelligence
-          </ThemedText>
+          </Text>
         </View>
       </View>
 
@@ -61,12 +55,9 @@ export function FullScreenLoader({ text = "SoilSense" }: { text?: string }) {
       </View>
 
       {/* Loading Text */}
-      <ThemedText
-        type="defaultSemiBold"
-        className="text-base text-neutral-500 font-medium"
-      >
+      <Text className="text-base text-neutral-500 dark:text-neutral-400 font-medium">
         Loading your agricultural data...
-      </ThemedText>
+      </Text>
     </View>
   );
 }

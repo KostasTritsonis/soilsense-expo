@@ -3,8 +3,7 @@ import { JobStatus } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ThemedView } from "../themed-view";
 
 export default function JobsWidget() {
@@ -33,12 +32,9 @@ export default function JobsWidget() {
           <View className="w-10 h-10 bg-orange-100 rounded-2xl flex items-center justify-center">
             <MaterialIcons name="schedule" size={20} color="#ea580c" />
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-lg font-semibold text-neutral-900"
-          >
+          <Text className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
             Due Jobs
-          </ThemedText>
+          </Text>
         </View>
         <TouchableOpacity
           onPress={() => {
@@ -50,12 +46,7 @@ export default function JobsWidget() {
           }}
           className="flex-row items-center gap-1"
         >
-          <ThemedText
-            type="default"
-            className="text-sm text-primary-600 font-medium"
-          >
-            View all
-          </ThemedText>
+          <Text className="text-sm text-primary-600 font-medium">View all</Text>
           <MaterialIcons name="arrow-forward" size={16} color="#2563eb" />
         </TouchableOpacity>
       </View>
@@ -70,20 +61,14 @@ export default function JobsWidget() {
               {/* Job Title and Status */}
               <View className="flex-row items-start justify-between gap-3">
                 <View className="flex-1 min-w-0">
-                  <ThemedText
-                    type="defaultSemiBold"
-                    className="text-sm font-semibold text-neutral-900 truncate"
-                  >
+                  <Text className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                     {job.title}
-                  </ThemedText>
+                  </Text>
                 </View>
                 <View className="text-right flex-shrink-0">
-                  <ThemedText
-                    type="default"
-                    className="text-xs font-medium text-orange-600"
-                  >
+                  <Text className="text-xs font-medium text-orange-600">
                     {getDaysRemaining(job.endDate, job.status)}
-                  </ThemedText>
+                  </Text>
                 </View>
               </View>
 
@@ -92,47 +77,37 @@ export default function JobsWidget() {
                 {/* Location */}
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="place" size={12} color="#6b7280" />
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-600 truncate"
-                  >
+                  <Text className="text-xs text-neutral-600 dark:text-neutral-400 truncate">
                     {job.location || "No location specified"}
-                  </ThemedText>
+                  </Text>
                 </View>
 
                 {/* Assigned To */}
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="person" size={12} color="#6b7280" />
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-600 truncate"
-                  >
+                  <Text className="text-xs text-neutral-600 dark:text-neutral-400 truncate">
                     {job.assignedTo?.name || "Unassigned"}
-                  </ThemedText>
+                  </Text>
                 </View>
 
                 {/* Description */}
                 {job.description && (
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-500"
+                  <Text
+                    className="text-xs text-neutral-500 dark:text-neutral-400"
                     numberOfLines={2}
                   >
                     {job.description}
-                  </ThemedText>
+                  </Text>
                 )}
               </View>
 
               {/* Timeline */}
               <View className="pt-2 border-t border-neutral-200">
                 <View className="flex-row items-center justify-between">
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-500"
-                  >
+                  <Text className="text-xs text-neutral-500 dark:text-neutral-400">
                     {new Date(job.startDate).toLocaleDateString()} -{" "}
                     {new Date(job.endDate).toLocaleDateString()}
-                  </ThemedText>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -144,15 +119,12 @@ export default function JobsWidget() {
             <View className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-3">
               <MaterialIcons name="schedule" size={24} color="#16a34a" />
             </View>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-sm text-neutral-500 font-medium"
-            >
+            <Text className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
               No jobs due
-            </ThemedText>
-            <ThemedText type="default" className="text-xs text-neutral-400">
+            </Text>
+            <Text className="text-xs text-neutral-400 dark:text-neutral-500">
               All caught up!
-            </ThemedText>
+            </Text>
           </View>
         )}
       </View>

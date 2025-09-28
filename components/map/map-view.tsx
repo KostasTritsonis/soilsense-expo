@@ -1,7 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, View } from "react-native";
 
 interface MapViewProps {
   children?: React.ReactNode;
@@ -35,68 +34,47 @@ export default function MapView({
           <View className="items-center mb-4">
             <MaterialIcons name="map" size={48} color="#2563eb" />
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-lg font-bold text-neutral-900 text-center mb-2"
-          >
+          <Text className="text-lg font-bold text-neutral-900 dark:text-neutral-100 text-center mb-2">
             Interactive Map
-          </ThemedText>
-          <ThemedText
-            type="default"
-            className="text-sm text-neutral-600 text-center mb-4"
-          >
+          </Text>
+          <Text className="text-sm text-neutral-600 dark:text-neutral-400 text-center mb-4">
             Field visualization and management
-          </ThemedText>
+          </Text>
 
           {initialRegion && (
             <View className="bg-neutral-100 p-3 rounded-xl mb-3">
-              <ThemedText
-                type="default"
-                className="text-xs text-neutral-600 text-center"
-              >
+              <Text className="text-xs text-neutral-600 dark:text-neutral-400 text-center">
                 Location: {initialRegion.latitude.toFixed(4)},{" "}
                 {initialRegion.longitude.toFixed(4)}
-              </ThemedText>
+              </Text>
             </View>
           )}
 
           {showsUserLocation && (
             <View className="bg-green-100 p-2 rounded-lg mb-2">
-              <ThemedText
-                type="default"
-                className="text-xs text-green-700 text-center"
-              >
+              <Text className="text-xs text-green-700 text-center">
                 📍 User Location Enabled
-              </ThemedText>
+              </Text>
             </View>
           )}
 
           <View className="bg-blue-100 p-3 rounded-xl mb-3">
-            <ThemedText
-              type="default"
-              className="text-xs text-blue-700 text-center"
-            >
+            <Text className="text-xs text-blue-700 text-center">
               🗺️ Mapbox integration ready
-            </ThemedText>
+            </Text>
           </View>
 
           <View className="bg-yellow-100 p-3 rounded-xl">
-            <ThemedText
-              type="default"
-              className="text-xs text-yellow-700 text-center"
-            >
+            <Text className="text-xs text-yellow-700 text-center">
               💡 Build development build for full map features
-            </ThemedText>
+            </Text>
           </View>
 
           {children && (
             <View className="mt-4 p-3 bg-neutral-50 rounded-xl">
-              <ThemedText
-                type="default"
-                className="text-xs text-neutral-600 text-center"
-              >
+              <Text className="text-xs text-neutral-600 dark:text-neutral-400 text-center">
                 Map overlays would appear here
-              </ThemedText>
+              </Text>
             </View>
           )}
         </View>

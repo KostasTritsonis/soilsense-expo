@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import {
   Modal,
   ScrollView,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 
 interface CategoryModalProps {
@@ -66,12 +66,9 @@ export default function CategoryModal({
         <View className="flex-row items-center justify-between p-4 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-blue-50">
           <View className="flex-row items-center gap-2">
             <MaterialIcons name="local-offer" size={20} color="#7c3aed" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-xl font-bold text-primary-700"
-            >
+            <Text className="text-xl font-bold text-primary-700">
               Add Field Details
-            </ThemedText>
+            </Text>
           </View>
           <TouchableOpacity
             onPress={onClose}
@@ -85,12 +82,7 @@ export default function CategoryModal({
           <View className="space-y-6">
             {/* Field Label Input */}
             <View>
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-neutral-700 text-sm mb-2"
-              >
-                Field Label
-              </ThemedText>
+              <Text className="text-neutral-700 text-sm mb-2">Field Label</Text>
               <TextInput
                 value={fieldLabel}
                 onChangeText={setFieldLabel}
@@ -103,12 +95,7 @@ export default function CategoryModal({
 
             {/* Category Selection */}
             <View>
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-neutral-700 text-sm mb-2"
-              >
-                Category
-              </ThemedText>
+              <Text className="text-neutral-700 text-sm mb-2">Category</Text>
               <View className="space-y-2">
                 {CATEGORIES.map((category) => (
                   <TouchableOpacity
@@ -121,8 +108,7 @@ export default function CategoryModal({
                     }`}
                   >
                     <View className="flex-row items-center justify-between">
-                      <ThemedText
-                        type="defaultSemiBold"
+                      <Text
                         className={`text-sm ${
                           selectedCategory === category
                             ? "text-primary-700"
@@ -130,7 +116,7 @@ export default function CategoryModal({
                         }`}
                       >
                         {category}
-                      </ThemedText>
+                      </Text>
                       {selectedCategory === category && (
                         <MaterialIcons name="check" size={20} color="#7c3aed" />
                       )}
@@ -151,12 +137,7 @@ export default function CategoryModal({
               disabled={!fieldLabel.trim()}
             >
               <MaterialIcons name="check" size={20} color="white" />
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-white font-semibold ml-2"
-              >
-                Confirm
-              </ThemedText>
+              <Text className="text-white font-semibold ml-2">Confirm</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -164,12 +145,9 @@ export default function CategoryModal({
               onPress={onClose}
             >
               <MaterialIcons name="close" size={20} color="#6b7280" />
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-neutral-700 font-semibold ml-2"
-              >
+              <Text className="text-neutral-700 font-semibold ml-2">
                 Cancel
-              </ThemedText>
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

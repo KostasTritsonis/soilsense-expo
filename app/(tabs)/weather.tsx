@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useWeatherStore } from "@/lib/stores/weather-store";
 import { CurrentWeather, ForecastDay } from "@/lib/types";
@@ -23,9 +22,9 @@ const WeatherCard = ({
   children: React.ReactNode;
 }) => (
   <ThemedView className="bg-white dark:bg-neutral-800 p-4 rounded-xl mb-4 shadow-md border border-soil-200/80 dark:border-neutral-700/80">
-    <ThemedText className="text-lg font-semibold text-soil-900 dark:text-neutral-100 mb-3">
+    <Text className="text-lg font-semibold text-soil-900 dark:text-neutral-100 mb-3">
       {title}
-    </ThemedText>
+    </Text>
     {children}
   </ThemedView>
 );
@@ -34,12 +33,12 @@ const ForecastCard = ({ day }: { day: ForecastDay }) => (
   <ThemedView className="bg-neutral-50 dark:bg-neutral-700/50 p-3 rounded-lg mb-2 shadow-sm">
     <View className="flex-row justify-between items-center">
       <View className="flex-1">
-        <ThemedText className="text-base font-semibold text-soil-900 dark:text-neutral-100">
+        <Text className="text-base font-semibold text-soil-900 dark:text-neutral-100">
           {day.day}
-        </ThemedText>
-        <ThemedText className="text-sm text-soil-600 dark:text-neutral-400">
+        </Text>
+        <Text className="text-sm text-soil-600 dark:text-neutral-400">
           {day.forecast}
-        </ThemedText>
+        </Text>
       </View>
       <Image
         source={{ uri: day.icon }}
@@ -47,15 +46,15 @@ const ForecastCard = ({ day }: { day: ForecastDay }) => (
         resizeMode="contain"
       />
       <View className="items-end">
-        <ThemedText className="text-base font-semibold text-soil-900 dark:text-neutral-100">
+        <Text className="text-base font-semibold text-soil-900 dark:text-neutral-100">
           {day.high}
-        </ThemedText>
-        <ThemedText className="text-sm text-soil-600 dark:text-neutral-400">
+        </Text>
+        <Text className="text-sm text-soil-600 dark:text-neutral-400">
           {day.low}
-        </ThemedText>
-        <ThemedText className="text-xs text-soil-500 dark:text-neutral-500">
+        </Text>
+        <Text className="text-xs text-soil-500 dark:text-neutral-500">
           {day.rainChance}
-        </ThemedText>
+        </Text>
       </View>
     </View>
   </ThemedView>
@@ -129,17 +128,17 @@ export default function WeatherScreen() {
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="py-6 items-center">
-          <ThemedText className="text-3xl font-bold text-soil-900 mb-2">
+          <Text className="text-3xl font-bold text-soil-900 dark:text-neutral-100 mb-2">
             Weather Dashboard
-          </ThemedText>
-          <ThemedText className="text-base text-soil-600  text-center mb-3">
+          </Text>
+          <Text className="text-base text-soil-600 dark:text-neutral-400 text-center mb-3">
             Monitor weather conditions for your agricultural operations
-          </ThemedText>
+          </Text>
           {currentLocation && (
             <View className="bg-primary-50 dark:bg-primary-900/20 px-4 py-2 rounded-full border border-primary-200 dark:border-primary-800">
-              <ThemedText className="text-sm font-medium text-primary-700 dark:text-primary-300">
+              <Text className="text-sm font-medium text-primary-700 dark:text-primary-300">
                 📍 {currentLocation.name}
-              </ThemedText>
+              </Text>
             </View>
           )}
         </View>
@@ -171,9 +170,9 @@ export default function WeatherScreen() {
 
         {error ? (
           <ThemedView className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4 mb-4">
-            <ThemedText className="text-red-700 dark:text-red-400 font-medium mb-3 text-center">
+            <Text className="text-red-700 dark:text-red-400 font-medium mb-3 text-center">
               {error}
-            </ThemedText>
+            </Text>
             <TouchableOpacity
               className="bg-red-500 py-2 px-4 rounded-lg self-center"
               onPress={handleSearch}
@@ -192,41 +191,41 @@ export default function WeatherScreen() {
                     className="w-16 h-16 mb-2"
                     resizeMode="contain"
                   />
-                  <ThemedText className="text-3xl font-bold text-soil-900 dark:text-neutral-100 mb-1">
+                  <Text className="text-3xl font-bold text-soil-900 dark:text-neutral-100 mb-1">
                     {currentWeather.temperature}
-                  </ThemedText>
-                  <ThemedText className="text-lg text-soil-600 dark:text-neutral-400 mb-4">
+                  </Text>
+                  <Text className="text-lg text-soil-600 dark:text-neutral-400 mb-4">
                     {currentWeather.forecast}
-                  </ThemedText>
+                  </Text>
                   <View className="flex-row justify-around w-full">
                     <View className="items-center">
-                      <ThemedText className="text-sm text-soil-500 dark:text-neutral-500">
+                      <Text className="text-sm text-soil-500 dark:text-neutral-500">
                         Humidity
-                      </ThemedText>
-                      <ThemedText className="text-base font-semibold text-soil-900 dark:text-neutral-100">
+                      </Text>
+                      <Text className="text-base font-semibold text-soil-900 dark:text-neutral-100">
                         {currentWeather.humidity}
-                      </ThemedText>
+                      </Text>
                     </View>
                     <View className="items-center">
-                      <ThemedText className="text-sm text-soil-500 dark:text-neutral-500">
+                      <Text className="text-sm text-soil-500 dark:text-neutral-500">
                         Wind
-                      </ThemedText>
-                      <ThemedText className="text-base font-semibold text-soil-900 dark:text-neutral-100">
+                      </Text>
+                      <Text className="text-base font-semibold text-soil-900 dark:text-neutral-100">
                         {currentWeather.windSpeed}
-                      </ThemedText>
+                      </Text>
                     </View>
                     <View className="items-center">
-                      <ThemedText className="text-sm text-soil-500 dark:text-neutral-500">
+                      <Text className="text-sm text-soil-500 dark:text-neutral-500">
                         Rainfall
-                      </ThemedText>
-                      <ThemedText className="text-base font-semibold text-soil-900 dark:text-neutral-100">
+                      </Text>
+                      <Text className="text-base font-semibold text-soil-900 dark:text-neutral-100">
                         {currentWeather.rainfall}
-                      </ThemedText>
+                      </Text>
                     </View>
                   </View>
-                  <ThemedText className="text-xs text-soil-400 dark:text-neutral-500 mt-3">
+                  <Text className="text-xs text-soil-400 dark:text-neutral-500 mt-3">
                     Last updated: {currentWeather.lastUpdated}
-                  </ThemedText>
+                  </Text>
                 </View>
               )}
             </WeatherCard>
@@ -241,13 +240,13 @@ export default function WeatherScreen() {
             {/* Weather Alerts */}
             <WeatherCard title="⚠️ Weather Alerts">
               <ThemedView className="bg-warning-50 dark:bg-warning-900/20 border border-warning-200 dark:border-warning-800 rounded-lg p-3">
-                <ThemedText className="text-warning-800 dark:text-warning-400 font-medium mb-1">
+                <Text className="text-warning-800 dark:text-warning-400 font-medium mb-1">
                   Agricultural Advisory
-                </ThemedText>
-                <ThemedText className="text-warning-700 dark:text-warning-300 text-sm">
+                </Text>
+                <Text className="text-warning-700 dark:text-warning-300 text-sm">
                   Moderate wind conditions expected. Consider protecting
                   sensitive crops.
-                </ThemedText>
+                </Text>
               </ThemedView>
             </WeatherCard>
 
@@ -255,29 +254,29 @@ export default function WeatherScreen() {
             <WeatherCard title="🌱 Crop Impact">
               <View className="space-y-3">
                 <View className="flex-row justify-between items-center">
-                  <ThemedText className="text-sm text-soil-600 dark:text-neutral-400">
+                  <Text className="text-sm text-soil-600 dark:text-neutral-400">
                     Wheat Growth
-                  </ThemedText>
+                  </Text>
                   <View className="flex-row items-center">
                     <View className="w-16 h-2 bg-soil-200 dark:bg-neutral-600 rounded-full mr-2">
                       <View className="w-12 h-2 bg-success-500 rounded-full" />
                     </View>
-                    <ThemedText className="text-sm font-medium text-soil-900 dark:text-neutral-100">
+                    <Text className="text-sm font-medium text-soil-900 dark:text-neutral-100">
                       Good
-                    </ThemedText>
+                    </Text>
                   </View>
                 </View>
                 <View className="flex-row justify-between items-center">
-                  <ThemedText className="text-sm text-soil-600 dark:text-neutral-400">
+                  <Text className="text-sm text-soil-600 dark:text-neutral-400">
                     Corn Growth
-                  </ThemedText>
+                  </Text>
                   <View className="flex-row items-center">
                     <View className="w-16 h-2 bg-soil-200 dark:bg-neutral-600 rounded-full mr-2">
                       <View className="w-10 h-2 bg-warning-500 rounded-full" />
                     </View>
-                    <ThemedText className="text-sm font-medium text-soil-900 dark:text-neutral-100">
+                    <Text className="text-sm font-medium text-soil-900 dark:text-neutral-100">
                       Fair
-                    </ThemedText>
+                    </Text>
                   </View>
                 </View>
               </View>

@@ -1,6 +1,5 @@
 import React from "react";
-import { View } from "react-native";
-import { ThemedText } from "./themed-text";
+import { Text, View } from "react-native";
 import { ThemedView } from "./themed-view";
 
 type CardProps = {
@@ -19,27 +18,18 @@ export default function Card({ title, value, subtitle, icon }: CardProps) {
             {icon}
           </View>
         )}
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-sm text-neutral-700 uppercase tracking-wide"
-        >
+        <Text className="text-sm font-semibold text-neutral-700 dark:text-neutral-300 uppercase tracking-wide">
           {title}
-        </ThemedText>
+        </Text>
       </View>
       <View className="flex-row items-baseline gap-2">
-        <ThemedText
-          type="title"
-          className="text-3xl font-bold text-neutral-900"
-        >
+        <Text className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
           {value}
-        </ThemedText>
+        </Text>
         {subtitle && (
-          <ThemedText
-            type="default"
-            className="text-sm text-neutral-500 font-medium"
-          >
+          <Text className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
             {subtitle}
-          </ThemedText>
+          </Text>
         )}
       </View>
     </ThemedView>

@@ -1,7 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, View } from "react-native";
 import { ThemedView } from "../themed-view";
 
 export interface WeatherAlert {
@@ -21,17 +20,14 @@ export default function WeatherAlerts({ alerts }: WeatherAlertsProps) {
           <View className="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center">
             <MaterialIcons name="info" size={20} color="#16a34a" />
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-xl font-semibold text-neutral-900"
-          >
+          <Text className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
             Weather Alerts
-          </ThemedText>
+          </Text>
         </View>
         <View className="items-center py-8">
-          <ThemedText type="default" className="text-neutral-500">
+          <Text className="text-neutral-500 dark:text-neutral-400">
             No weather alerts at this time
-          </ThemedText>
+          </Text>
         </View>
       </ThemedView>
     );
@@ -43,12 +39,9 @@ export default function WeatherAlerts({ alerts }: WeatherAlertsProps) {
         <View className="w-10 h-10 bg-orange-100 rounded-2xl flex items-center justify-center">
           <MaterialIcons name="warning" size={20} color="#ea580c" />
         </View>
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-xl font-semibold text-neutral-900"
-        >
+        <Text className="text-xl font-semibold text-neutral-900">
           Weather Alerts
-        </ThemedText>
+        </Text>
       </View>
 
       <View className="space-y-3">
@@ -67,14 +60,13 @@ export default function WeatherAlerts({ alerts }: WeatherAlertsProps) {
               ) : (
                 <MaterialIcons name="info" size={20} color="#2563eb" />
               )}
-              <ThemedText
-                type="default"
+              <Text
                 className={`text-sm font-medium ${
                   alert.type === "warning" ? "text-orange-800" : "text-blue-800"
                 }`}
               >
                 {alert.message}
-              </ThemedText>
+              </Text>
             </View>
           </View>
         ))}

@@ -1,8 +1,7 @@
 import { Field } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, TouchableOpacity, View } from "react-native";
 
 interface FieldAnnotationProps {
   field: Field;
@@ -28,20 +27,17 @@ export default function FieldAnnotation({
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: field.color }}
           />
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-sm font-semibold text-neutral-900"
-          >
+          <Text className="text-sm font-semibold text-neutral-900">
             {field.label || "Field"}
-          </ThemedText>
+          </Text>
           <MaterialIcons name="info" size={16} color="#6b7280" />
         </View>
-        <ThemedText type="default" className="text-xs text-neutral-600 mt-1">
+        <Text className="text-xs text-neutral-600 mt-1">
           Area: {field.area.toFixed(2)} m²
-        </ThemedText>
-        <ThemedText type="default" className="text-xs text-neutral-500 mt-1">
+        </Text>
+        <Text className="text-xs text-neutral-500 mt-1">
           📍 {centerLat.toFixed(4)}, {centerLng.toFixed(4)}
-        </ThemedText>
+        </Text>
       </TouchableOpacity>
     </View>
   );

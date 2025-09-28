@@ -2,9 +2,8 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useUser } from "@clerk/clerk-expo";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ThemeToggle } from "./theme-toggle";
-import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
 
 export default function Header() {
@@ -21,7 +20,7 @@ export default function Header() {
   }
 
   return (
-    <ThemedView className="w-full px-4 py-3 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border-b border-soil-200/50 dark:border-neutral-700/50">
+    <ThemedView className="w-full  px-4 py-3 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border-b border-soil-200/50 dark:border-neutral-700/50">
       <View className="flex-row items-center justify-between">
         {/* Logo Section */}
         <View className="flex-row items-center gap-3">
@@ -33,18 +32,12 @@ export default function Header() {
             />
           </View>
           <View>
-            <ThemedText
-              type="title"
-              className="text-xl font-bold text-neutral-900 dark:text-neutral-100"
-            >
+            <Text className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
               SoilSense
-            </ThemedText>
-            <ThemedText
-              type="default"
-              className="text-xs text-neutral-500 dark:text-neutral-400"
-            >
+            </Text>
+            <Text className="text-[8px] text-neutral-500 dark:text-neutral-400">
               Agricultural Intelligence
-            </ThemedText>
+            </Text>
           </View>
         </View>
 
@@ -56,13 +49,8 @@ export default function Header() {
               <MaterialIcons name="person" size={20} color="white" />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity className="px-4 py-2 bg-primary-600 rounded-2xl shadow-md shadow-primary-600/25">
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-white font-semibold text-sm"
-              >
-                Sign In
-              </ThemedText>
+            <TouchableOpacity className="px-3 py-2 bg-primary-600 rounded-2xl shadow-md shadow-primary-600/25">
+              <Text className="text-white font-semibold text-sm">Sign In</Text>
             </TouchableOpacity>
           )}
         </View>

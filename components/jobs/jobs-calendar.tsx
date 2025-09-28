@@ -2,9 +2,8 @@ import { useJobsStore } from "@/lib/stores/jobs-store";
 import { Job, JobStatus } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { Calendar, DateData } from "react-native-calendars";
-import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 
 type JobsCalendarProps = {
@@ -110,12 +109,9 @@ export default function JobsCalendar({
         <View className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center">
           <MaterialIcons name="event" size={20} color="#2563eb" />
         </View>
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-xl font-semibold text-neutral-900"
-        >
+        <Text className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           Job Calendar
-        </ThemedText>
+        </Text>
       </View>
 
       {/* Calendar Component */}
@@ -157,22 +153,16 @@ export default function JobsCalendar({
       {/* Selected Date Jobs */}
       {selectedDate && (
         <View className="mt-6">
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-lg font-semibold text-neutral-900 mb-4"
-          >
+          <Text className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">
             Jobs for {formatDate(selectedDate)}
-          </ThemedText>
+          </Text>
 
           {selectedDateJobs.length === 0 ? (
             <ThemedView className="bg-neutral-50/80 rounded-2xl p-4 items-center">
               <MaterialIcons name="event-busy" size={32} color="#9ca3af" />
-              <ThemedText
-                type="default"
-                className="text-neutral-600 mt-2 text-center"
-              >
+              <Text className="text-neutral-600 dark:text-neutral-400 mt-2 text-center">
                 No jobs scheduled for this date
-              </ThemedText>
+              </Text>
             </ThemedView>
           ) : (
             <ScrollView className="max-h-64">
@@ -183,29 +173,20 @@ export default function JobsCalendar({
                 >
                   <View className="flex-row items-start justify-between mb-2">
                     <View className="flex-1">
-                      <ThemedText
-                        type="defaultSemiBold"
-                        className="text-base font-semibold text-neutral-900"
-                      >
+                      <Text className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                         {job.title}
-                      </ThemedText>
-                      <ThemedText
-                        type="default"
-                        className="text-sm text-neutral-600 mt-1"
-                      >
+                      </Text>
+                      <Text className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
                         {job.description}
-                      </ThemedText>
+                      </Text>
                     </View>
                     <View
                       className="px-2 py-1 rounded-full"
                       style={{ backgroundColor: getStatusColor(job.status) }}
                     >
-                      <ThemedText
-                        type="default"
-                        className="text-xs font-medium text-white"
-                      >
+                      <Text className="text-xs font-medium text-white">
                         {job.status}
-                      </ThemedText>
+                      </Text>
                     </View>
                   </View>
 
@@ -216,37 +197,28 @@ export default function JobsCalendar({
                         size={14}
                         color="#6b7280"
                       />
-                      <ThemedText
-                        type="default"
-                        className="text-xs text-neutral-600"
-                      >
+                      <Text className="text-xs text-neutral-600 dark:text-neutral-400">
                         {new Date(job.startDate).toLocaleDateString()} -{" "}
                         {new Date(job.endDate).toLocaleDateString()}
-                      </ThemedText>
+                      </Text>
                     </View>
                   </View>
 
                   {job.location && (
                     <View className="flex-row items-center gap-1 mt-2">
                       <MaterialIcons name="place" size={14} color="#6b7280" />
-                      <ThemedText
-                        type="default"
-                        className="text-xs text-neutral-600"
-                      >
+                      <Text className="text-xs text-neutral-600 dark:text-neutral-400">
                         {job.location}
-                      </ThemedText>
+                      </Text>
                     </View>
                   )}
 
                   {job.assignedTo && (
                     <View className="flex-row items-center gap-1 mt-2">
                       <MaterialIcons name="person" size={14} color="#6b7280" />
-                      <ThemedText
-                        type="default"
-                        className="text-xs text-neutral-600"
-                      >
+                      <Text className="text-xs text-neutral-600 dark:text-neutral-400">
                         {job.assignedTo.name}
-                      </ThemedText>
+                      </Text>
                     </View>
                   )}
                 </ThemedView>
@@ -258,39 +230,36 @@ export default function JobsCalendar({
 
       {/* Legend */}
       <View className="mt-6 pt-4 border-t border-neutral-200">
-        <ThemedText
-          type="default"
-          className="text-sm font-medium text-neutral-700 mb-3"
-        >
+        <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
           Status Legend
-        </ThemedText>
+        </Text>
         <View className="flex-row flex-wrap gap-4">
           <View className="flex-row items-center gap-2">
             <View
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: getStatusColor("Ongoing") }}
             />
-            <ThemedText type="default" className="text-xs text-neutral-600">
+            <Text className="text-xs text-neutral-600 dark:text-neutral-400">
               Ongoing
-            </ThemedText>
+            </Text>
           </View>
           <View className="flex-row items-center gap-2">
             <View
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: getStatusColor("Due") }}
             />
-            <ThemedText type="default" className="text-xs text-neutral-600">
+            <Text className="text-xs text-neutral-600 dark:text-neutral-400">
               Due
-            </ThemedText>
+            </Text>
           </View>
           <View className="flex-row items-center gap-2">
             <View
               className="w-3 h-3 rounded-full"
               style={{ backgroundColor: getStatusColor("Completed") }}
             />
-            <ThemedText type="default" className="text-xs text-neutral-600">
+            <Text className="text-xs text-neutral-600 dark:text-neutral-400">
               Completed
-            </ThemedText>
+            </Text>
           </View>
         </View>
       </View>

@@ -1,8 +1,7 @@
 import { useFieldsStore } from "@/lib/stores/fields-store";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, TouchableOpacity, View } from "react-native";
 
 type FieldListProps = {
   onFieldSelect: (fieldId: string) => void;
@@ -33,15 +32,12 @@ export default function FieldList({
           <View className="w-12 h-12 bg-neutral-100 rounded-2xl flex items-center justify-center mb-3">
             <MaterialIcons name="place" size={24} color="#9ca3af" />
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-neutral-500 font-medium"
-          >
+          <Text className="text-neutral-500 dark:text-neutral-400 font-medium">
             No fields created yet
-          </ThemedText>
-          <ThemedText type="default" className="text-sm text-neutral-400">
+          </Text>
+          <Text className="text-sm text-neutral-400 dark:text-neutral-500">
             Create your first field to get started
-          </ThemedText>
+          </Text>
         </View>
       ) : (
         <View className="space-y-3">
@@ -60,8 +56,7 @@ export default function FieldList({
                   className="w-4 h-4 rounded-full flex-shrink-0"
                   style={{ backgroundColor: field.color }}
                 />
-                <ThemedText
-                  type="defaultSemiBold"
+                <Text
                   className={`text-sm font-semibold truncate flex-1 ${
                     selectedFieldId === field.id
                       ? "text-primary-900"
@@ -69,7 +64,7 @@ export default function FieldList({
                   }`}
                 >
                   {field.label || "Unnamed Field"}
-                </ThemedText>
+                </Text>
                 <TouchableOpacity
                   className="w-6 h-6 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0"
                   onPress={() => handleDeleteField(field.id)}
@@ -81,21 +76,15 @@ export default function FieldList({
               <View className="flex-row items-center gap-4 mt-3">
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="straighten" size={12} color="#6b7280" />
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-600"
-                  >
+                  <Text className="text-xs text-neutral-600">
                     {(field.area || 0).toFixed(2)} m²
-                  </ThemedText>
+                  </Text>
                 </View>
                 <View className="flex-row items-center gap-2">
                   <MaterialIcons name="place" size={12} color="#6b7280" />
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-600"
-                  >
+                  <Text className="text-xs text-neutral-600">
                     {field.categories?.[0]?.type || "Uncategorized"}
-                  </ThemedText>
+                  </Text>
                 </View>
               </View>
 

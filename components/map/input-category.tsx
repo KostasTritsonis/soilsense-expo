@@ -1,7 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { TextInput, TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 type InputCategoryProps = {
   onCreateCategory?: (categoryName: string) => Promise<void>;
@@ -35,12 +34,9 @@ export default function InputCategory({
 
   return (
     <View className="w-full">
-      <ThemedText
-        type="defaultSemiBold"
-        className="text-lg font-semibold text-neutral-900 pb-4"
-      >
+      <Text className="text-lg font-semibold text-neutral-900 pb-4">
         Add Category
-      </ThemedText>
+      </Text>
       <View className="space-y-3">
         <TextInput
           value={categoryName}
@@ -63,31 +59,19 @@ export default function InputCategory({
           {isSaving ? (
             <>
               <MaterialIcons name="refresh" size={16} color="white" />
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-white font-semibold"
-              >
-                Saving...
-              </ThemedText>
+              <Text className="text-white font-semibold">Saving...</Text>
             </>
           ) : (
             <>
               <MaterialIcons name="add" size={16} color="white" />
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-white font-semibold"
-              >
-                Add Category
-              </ThemedText>
+              <Text className="text-white font-semibold">Add Category</Text>
             </>
           )}
         </TouchableOpacity>
 
         {error && (
           <View className="p-3 bg-red-50 border border-red-200 rounded-2xl">
-            <ThemedText type="default" className="text-red-700 text-sm">
-              {error}
-            </ThemedText>
+            <Text className="text-red-700 text-sm">{error}</Text>
           </View>
         )}
       </View>

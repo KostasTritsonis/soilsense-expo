@@ -1,9 +1,9 @@
 import { CurrentWeather, ForecastDay } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 import React from "react";
-import { ThemedText } from "../themed-text";
+
 import { ThemedView } from "../themed-view";
 
 interface CropImpactCardProps {
@@ -18,9 +18,9 @@ export default function CropImpactCard({
   if (!currentWeather) {
     return (
       <ThemedView className="bg-white/90 rounded-3xl shadow-sm border border-white/60 p-6 items-center">
-        <ThemedText type="default" className="text-neutral-500">
+        <Text className="text-neutral-500 dark:text-neutral-400">
           Weather data not available.
-        </ThemedText>
+        </Text>
       </ThemedView>
     );
   }
@@ -31,12 +31,9 @@ export default function CropImpactCard({
         <View className="w-10 h-10 bg-green-100 rounded-2xl flex items-center justify-center">
           <MaterialIcons name="eco" size={20} color="#16a34a" />
         </View>
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-xl font-semibold text-neutral-900"
-        >
+        <Text className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           Crop Impact Analysis
-        </ThemedText>
+        </Text>
       </View>
 
       <View className="space-y-4">
@@ -86,42 +83,35 @@ const CropImpactItem: React.FC<CropImpactItemProps> = ({
 
   return (
     <View className="p-4 bg-neutral-50/80 rounded-2xl border border-neutral-100">
-      <ThemedText
-        type="defaultSemiBold"
-        className="font-semibold text-neutral-900 text-sm pb-3"
-      >
+      <Text className="font-semibold text-neutral-900 dark:text-neutral-100 text-sm pb-3">
         {cropName}
-      </ThemedText>
+      </Text>
 
       <View className="space-y-3">
         {/* Temperature Status */}
         <View className="flex-row items-center gap-3">
           <MaterialIcons name="thermostat" size={16} color="#dc2626" />
           <View className="flex-1">
-            <ThemedText type="default" className="text-xs text-neutral-600">
+            <Text className="text-xs text-neutral-600 dark:text-neutral-400">
               Temperature
-            </ThemedText>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-900"
-            >
+            </Text>
+            <Text className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
               {currentWeather.temperature}°C (Optimal: {optimalTempRange[0]}-
               {optimalTempRange[1]}°C)
-            </ThemedText>
+            </Text>
           </View>
           <View
             className={`px-2 py-1 rounded-full ${
               isOptimalTemp ? "bg-green-100" : "bg-yellow-100"
             }`}
           >
-            <ThemedText
-              type="default"
+            <Text
               className={`text-xs font-medium ${
                 isOptimalTemp ? "text-green-700" : "text-yellow-700"
               }`}
             >
               {isOptimalTemp ? "Optimal" : "Moderate"}
-            </ThemedText>
+            </Text>
           </View>
         </View>
 
@@ -129,29 +119,25 @@ const CropImpactItem: React.FC<CropImpactItemProps> = ({
         <View className="flex-row items-center gap-3">
           <MaterialIcons name="water-drop" size={16} color="#2563eb" />
           <View className="flex-1">
-            <ThemedText type="default" className="text-xs text-neutral-600">
+            <Text className="text-xs text-neutral-600 dark:text-neutral-400">
               Humidity
-            </ThemedText>
-            <ThemedText
-              type="default"
-              className="text-sm font-medium text-neutral-900"
-            >
+            </Text>
+            <Text className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
               {currentWeather.humidity}%
-            </ThemedText>
+            </Text>
           </View>
           <View
             className={`px-2 py-1 rounded-full ${
               isHighHumidity ? "bg-orange-100" : "bg-green-100"
             }`}
           >
-            <ThemedText
-              type="default"
+            <Text
               className={`text-xs font-medium ${
                 isHighHumidity ? "text-orange-700" : "text-green-700"
               }`}
             >
               {isHighHumidity ? "High" : "Normal"}
-            </ThemedText>
+            </Text>
           </View>
         </View>
 
@@ -160,29 +146,26 @@ const CropImpactItem: React.FC<CropImpactItemProps> = ({
           <View className="flex-row items-start gap-3 p-3 bg-orange-50 rounded-xl border border-orange-100">
             <MaterialIcons name="warning" size={16} color="#ea580c" />
             <View className="flex-1">
-              <ThemedText type="default" className="text-xs text-orange-800">
+              <Text className="text-xs text-orange-800">
                 {isHighHumidity && (
-                  <ThemedText type="default" className="pb-1">
+                  <Text className="pb-1">
                     Monitor for fungal diseases due to high humidity
-                  </ThemedText>
+                  </Text>
                 )}
                 {heavyRainExpected && (
-                  <ThemedText type="default">
+                  <Text>
                     Heavy rain expected - consider protective measures
-                  </ThemedText>
+                  </Text>
                 )}
-              </ThemedText>
+              </Text>
             </View>
           </View>
         )}
 
         {!isHighHumidity && !heavyRainExpected && (
-          <ThemedText
-            type="default"
-            className="text-xs text-green-700 font-medium"
-          >
+          <Text className="text-xs text-green-700 font-medium">
             ✓ Conditions are favorable for growth
-          </ThemedText>
+          </Text>
         )}
       </View>
     </View>

@@ -1,8 +1,7 @@
 import { CurrentWeather } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, View } from "react-native";
 import { ThemedView } from "../themed-view";
 
 interface CurrentWeatherCardProps {
@@ -21,9 +20,9 @@ export default function CurrentWeatherCard({
   if (!currentWeather) {
     return (
       <ThemedView className="bg-white/90 rounded-3xl shadow-sm border border-white/60 p-6 items-center">
-        <ThemedText type="default" className="text-neutral-500">
+        <Text className="text-neutral-500 dark:text-neutral-400">
           Weather data not available.
-        </ThemedText>
+        </Text>
       </ThemedView>
     );
   }
@@ -37,26 +36,23 @@ export default function CurrentWeatherCard({
             <MaterialIcons name="cloud" size={20} color="#2563eb" />
           </View>
           <View>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-xl font-semibold text-neutral-900"
-            >
+            <Text className="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
               Current Weather
-            </ThemedText>
+            </Text>
             <View className="flex-row items-center gap-2">
               <MaterialIcons name="place" size={16} color="#6b7280" />
-              <ThemedText type="default" className="text-sm text-neutral-600">
+              <Text className="text-sm text-neutral-600 dark:text-neutral-400">
                 {currentWeather.location}
-              </ThemedText>
+              </Text>
             </View>
           </View>
         </View>
         <View className="text-right">
           <View className="flex-row items-center gap-2">
             <MaterialIcons name="schedule" size={16} color="#6b7280" />
-            <ThemedText type="default" className="text-sm text-neutral-500">
+            <Text className="text-sm text-neutral-500 dark:text-neutral-400">
               Updated: {currentWeather.lastUpdated}
-            </ThemedText>
+            </Text>
           </View>
         </View>
       </View>
@@ -69,18 +65,12 @@ export default function CurrentWeatherCard({
             <MaterialIcons name="wb-sunny" size={48} color="#f59e0b" />
           </View>
           <View>
-            <ThemedText
-              type="title"
-              className="text-5xl font-bold text-neutral-900"
-            >
+            <Text className="text-5xl font-bold text-neutral-900 dark:text-neutral-100">
               {currentWeather.temperature}
-            </ThemedText>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-xl text-neutral-600 font-medium"
-            >
+            </Text>
+            <Text className="text-xl text-neutral-600 dark:text-neutral-400 font-medium">
               {currentWeather.forecast}
-            </ThemedText>
+            </Text>
           </View>
         </View>
 
@@ -121,18 +111,12 @@ const WeatherDetailItem: React.FC<WeatherDetailItemProps> = ({
     <View className="flex-row items-center gap-3 p-3 bg-neutral-50/80 rounded-2xl flex-1 min-w-[140px]">
       <View className="flex-shrink-0">{icon}</View>
       <View>
-        <ThemedText
-          type="default"
-          className="text-xs text-neutral-600 font-medium"
-        >
+        <Text className="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
           {label}
-        </ThemedText>
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-sm font-semibold text-neutral-900"
-        >
+        </Text>
+        <Text className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
           {value}
-        </ThemedText>
+        </Text>
       </View>
     </View>
   );

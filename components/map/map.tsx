@@ -2,8 +2,7 @@ import { useFieldsStore } from "@/lib/stores/fields-store";
 import { Field } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import CategoryModal from "./category-modal";
 import DirectionsPanel from "./directions-panel";
 import FieldAnnotation from "./field-annotation";
@@ -99,12 +98,9 @@ export default function MapComponent() {
     <View className="flex-1 bg-neutral-100">
       {/* Mobile header */}
       <View className="flex-row items-center justify-between p-4 bg-white/95 border-b border-neutral-200">
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-xl font-bold text-primary-700"
-        >
+        <Text className="text-xl font-bold text-primary-700">
           Field Manager
-        </ThemedText>
+        </Text>
         <TouchableOpacity
           onPress={() => setIsSidebarOpen(!isSidebarOpen)}
           className="bg-primary-600 p-2 rounded-xl shadow-sm"
@@ -147,12 +143,9 @@ export default function MapComponent() {
             <ScrollView className="flex-1">
               {/* Sidebar header */}
               <View className="p-4 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-blue-50">
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-lg font-semibold text-primary-700"
-                >
+                <Text className="text-lg font-semibold text-primary-700">
                   Menu
-                </ThemedText>
+                </Text>
               </View>
 
               {/* Controls section */}
@@ -169,12 +162,9 @@ export default function MapComponent() {
 
               {/* Fields list */}
               <View className="flex-1 px-4 pb-4">
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-lg font-semibold text-neutral-900 mb-4"
-                >
+                <Text className="text-lg font-semibold text-neutral-900 mb-4">
                   Fields
-                </ThemedText>
+                </Text>
                 <ScrollView
                   className="flex-1"
                   showsVerticalScrollIndicator={false}
@@ -196,18 +186,12 @@ export default function MapComponent() {
                             style={{ backgroundColor: field.color }}
                           />
                           <View className="flex-1">
-                            <ThemedText
-                              type="defaultSemiBold"
-                              className="text-sm font-semibold text-neutral-900"
-                            >
+                            <Text className="text-sm font-semibold text-neutral-900">
                               {field.label || "Unnamed Field"}
-                            </ThemedText>
-                            <ThemedText
-                              type="default"
-                              className="text-xs text-neutral-600"
-                            >
+                            </Text>
+                            <Text className="text-xs text-neutral-600">
                               {(field.area || 0).toFixed(2)} m²
-                            </ThemedText>
+                            </Text>
                           </View>
                           <TouchableOpacity
                             onPress={() => handleEditField(field.id)}

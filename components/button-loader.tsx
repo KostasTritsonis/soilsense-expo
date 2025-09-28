@@ -1,7 +1,6 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Loader from "./loader";
-import { ThemedText } from "./themed-text";
 
 interface ButtonLoaderProps {
   isLoading: boolean;
@@ -33,9 +32,9 @@ export default function ButtonLoader({
           <Loader size="sm" text="" />
         </View>
       )}
-      <ThemedText type="default" className={isLoading ? "opacity-80" : ""}>
+      <Text className={isLoading ? "opacity-80" : ""}>
         {isLoading ? loadingText : children}
-      </ThemedText>
+      </Text>
     </TouchableOpacity>
   );
 }

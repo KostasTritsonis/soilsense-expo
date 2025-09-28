@@ -4,9 +4,8 @@ import { fetchWeatherData } from "@/lib/weather";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Loader from "../loader";
-import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 
 export default function WeatherWidget() {
@@ -46,12 +45,9 @@ export default function WeatherWidget() {
             <View className="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center">
               <MaterialIcons name="cloud" size={20} color="#2563eb" />
             </View>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-lg font-semibold text-neutral-900"
-            >
+            <Text className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
               Weather
-            </ThemedText>
+            </Text>
           </View>
         </View>
         <View className="flex justify-center items-center py-8">
@@ -69,18 +65,15 @@ export default function WeatherWidget() {
             <View className="w-10 h-10 bg-blue-100 rounded-2xl flex items-center justify-center">
               <MaterialIcons name="cloud" size={20} color="#2563eb" />
             </View>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-lg font-semibold text-neutral-900"
-            >
+            <Text className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
               Weather
-            </ThemedText>
+            </Text>
           </View>
         </View>
         <View className="py-8">
-          <ThemedText type="default" className="text-center text-neutral-500">
+          <Text className="text-center text-neutral-500 dark:text-neutral-400">
             Unable to load weather data
-          </ThemedText>
+          </Text>
         </View>
       </ThemedView>
     );
@@ -94,16 +87,13 @@ export default function WeatherWidget() {
             <MaterialIcons name="cloud" size={20} color="#2563eb" />
           </View>
           <View>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-lg font-semibold text-neutral-900"
-            >
+            <Text className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
               Weather
-            </ThemedText>
+            </Text>
             {weather && (
-              <ThemedText type="default" className="text-sm text-neutral-600">
+              <Text className="text-sm text-neutral-600 dark:text-neutral-400">
                 {weather.location}
-              </ThemedText>
+              </Text>
             )}
           </View>
         </View>
@@ -117,12 +107,7 @@ export default function WeatherWidget() {
           }}
           className="flex-row items-center gap-1"
         >
-          <ThemedText
-            type="default"
-            className="text-sm text-primary-600 font-medium"
-          >
-            View all
-          </ThemedText>
+          <Text className="text-sm text-primary-600 font-medium">View all</Text>
           <MaterialIcons name="arrow-forward" size={16} color="#2563eb" />
         </TouchableOpacity>
       </View>
@@ -131,61 +116,49 @@ export default function WeatherWidget() {
         <View className="flex-row items-center justify-between p-3 bg-neutral-50/80 rounded-2xl">
           <View className="flex-row items-center gap-3">
             <MaterialIcons name="thermostat" size={20} color="#dc2626" />
-            <ThemedText type="default" className="text-sm text-neutral-600">
+            <Text className="text-sm text-neutral-600 dark:text-neutral-400">
               Temperature
-            </ThemedText>
+            </Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="font-semibold text-neutral-900"
-          >
+          <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
             {weather.temperature}
-          </ThemedText>
+          </Text>
         </View>
 
         <View className="flex-row items-center justify-between p-3 bg-neutral-50/80 rounded-2xl">
           <View className="flex-row items-center gap-3">
             <MaterialIcons name="water-drop" size={20} color="#2563eb" />
-            <ThemedText type="default" className="text-sm text-neutral-600">
+            <Text className="text-sm text-neutral-600 dark:text-neutral-400">
               Humidity
-            </ThemedText>
+            </Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="font-semibold text-neutral-900"
-          >
+          <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
             {weather.humidity}
-          </ThemedText>
+          </Text>
         </View>
 
         <View className="flex-row items-center justify-between p-3 bg-neutral-50/80 rounded-2xl">
           <View className="flex-row items-center gap-3">
             <MaterialIcons name="wb-sunny" size={20} color="#eab308" />
-            <ThemedText type="default" className="text-sm text-neutral-600">
+            <Text className="text-sm text-neutral-600 dark:text-neutral-400">
               Forecast
-            </ThemedText>
+            </Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="font-semibold text-neutral-900"
-          >
+          <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
             {weather.forecast}
-          </ThemedText>
+          </Text>
         </View>
 
         <View className="flex-row items-center justify-between p-3 bg-neutral-50/80 rounded-2xl">
           <View className="flex-row items-center gap-3">
             <MaterialIcons name="cloud" size={20} color="#6b7280" />
-            <ThemedText type="default" className="text-sm text-neutral-600">
+            <Text className="text-sm text-neutral-600 dark:text-neutral-400">
               Rainfall
-            </ThemedText>
+            </Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="font-semibold text-neutral-900"
-          >
+          <Text className="font-semibold text-neutral-900 dark:text-neutral-100">
             {weather.rainfall}
-          </ThemedText>
+          </Text>
         </View>
       </View>
     </ThemedView>

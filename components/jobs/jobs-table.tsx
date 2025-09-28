@@ -2,8 +2,7 @@ import { useJobsStore } from "@/lib/stores/jobs-store";
 import { Job, JobStatus } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { ThemedView } from "../themed-view";
 import StatusBadge from "./status-badge";
 
@@ -75,15 +74,12 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
         <View className="w-16 h-16 bg-neutral-100 rounded-3xl flex items-center justify-center mb-4">
           <MaterialIcons name="event" size={32} color="#9ca3af" />
         </View>
-        <ThemedText
-          type="defaultSemiBold"
-          className="text-lg font-semibold text-neutral-700 mb-2"
-        >
+        <Text className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
           No jobs found
-        </ThemedText>
-        <ThemedText type="default" className="text-neutral-500 text-center">
+        </Text>
+        <Text className="text-neutral-500 dark:text-neutral-400 text-center">
           Create your first job to get started.
-        </ThemedText>
+        </Text>
       </ThemedView>
     );
   }
@@ -98,18 +94,12 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
           >
             <View className="flex-row items-start justify-between mb-4">
               <View className="flex-1">
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1"
-                >
+                <Text className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
                   {job.title}
-                </ThemedText>
-                <ThemedText
-                  type="default"
-                  className="text-sm text-neutral-600 dark:text-neutral-400"
-                >
+                </Text>
+                <Text className="text-sm text-neutral-600 dark:text-neutral-400">
                   {job.description}
-                </ThemedText>
+                </Text>
               </View>
               <View className="flex-row items-center gap-2">
                 <StatusBadge status={job.status} />
@@ -129,19 +119,13 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
                   <MaterialIcons name="event" size={16} color="#2563eb" />
                 </View>
                 <View className="flex-1">
-                  <ThemedText
-                    type="default"
-                    className="text-sm font-medium text-neutral-900 dark:text-neutral-100"
-                  >
+                  <Text className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
                     {new Date(job.startDate).toLocaleDateString()} -{" "}
                     {new Date(job.endDate).toLocaleDateString()}
-                  </ThemedText>
-                  <ThemedText
-                    type="default"
-                    className="text-xs text-neutral-600 dark:text-neutral-400"
-                  >
+                  </Text>
+                  <Text className="text-xs text-neutral-600 dark:text-neutral-400">
                     {getDaysRemaining(job.endDate, job.status)}
-                  </ThemedText>
+                  </Text>
                   <View className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                     <View
                       className={`h-2 rounded-full transition-all duration-300 ${getStatusColor(job.status)}`}
@@ -161,18 +145,12 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
                       <MaterialIcons name="place" size={16} color="#16a34a" />
                     </View>
                     <View>
-                      <ThemedText
-                        type="default"
-                        className="text-sm font-medium text-neutral-900 dark:text-neutral-100"
-                      >
+                      <Text className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
                         Location
-                      </ThemedText>
-                      <ThemedText
-                        type="default"
-                        className="text-xs text-neutral-600 dark:text-neutral-400"
-                      >
+                      </Text>
+                      <Text className="text-xs text-neutral-600 dark:text-neutral-400">
                         {job.location || "Not specified"}
-                      </ThemedText>
+                      </Text>
                     </View>
                   </View>
 
@@ -181,18 +159,12 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
                       <MaterialIcons name="person" size={16} color="#7c3aed" />
                     </View>
                     <View>
-                      <ThemedText
-                        type="default"
-                        className="text-sm font-medium text-neutral-900 dark:text-neutral-100"
-                      >
+                      <Text className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
                         Assigned To
-                      </ThemedText>
-                      <ThemedText
-                        type="default"
-                        className="text-xs text-neutral-600 dark:text-neutral-400"
-                      >
+                      </Text>
+                      <Text className="text-xs text-neutral-600 dark:text-neutral-400">
                         {job.assignedTo?.name || "Unassigned"}
-                      </ThemedText>
+                      </Text>
                     </View>
                   </View>
                 </View>
@@ -200,12 +172,9 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
 
               {/* Status Change */}
               <View className="pt-2">
-                <ThemedText
-                  type="default"
-                  className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2"
-                >
+                <Text className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                   Update Status
-                </ThemedText>
+                </Text>
                 <View className="flex-row gap-2">
                   {(["Ongoing", "Due", "Completed"] as JobStatus[]).map(
                     (status) => (
@@ -218,8 +187,7 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
                             : "bg-white dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600"
                         }`}
                       >
-                        <ThemedText
-                          type="default"
+                        <Text
                           className={`text-sm text-center font-medium ${
                             job.status === status
                               ? "text-white"
@@ -227,7 +195,7 @@ export default function JobsTable({ jobs: propJobs }: JobsTableProps = {}) {
                           }`}
                         >
                           {status}
-                        </ThemedText>
+                        </Text>
                       </TouchableOpacity>
                     )
                   )}

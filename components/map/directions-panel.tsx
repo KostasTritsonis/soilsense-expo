@@ -1,7 +1,12 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Linking, ScrollView, TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import {
+  Linking,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { ThemedView } from "../themed-view";
 
 interface RouteStep {
@@ -75,12 +80,7 @@ export default function DirectionsPanel({
       {/* Header */}
       <View className="bg-gradient-to-r from-primary-50 to-blue-50 p-4 border-b border-neutral-200">
         <View className="flex-row justify-between items-center pb-3">
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-xl font-bold text-neutral-900"
-          >
-            Directions
-          </ThemedText>
+          <Text className="text-xl font-bold text-neutral-900">Directions</Text>
           <TouchableOpacity
             onPress={onClose}
             className="w-8 h-8 bg-white/80 rounded-xl flex items-center justify-center"
@@ -96,19 +96,15 @@ export default function DirectionsPanel({
               <MaterialIcons name="place" size={16} color="#059669" />
             </View>
             <View className="flex-1">
-              <ThemedText
-                type="default"
-                className="text-xs text-neutral-600 font-medium"
-              >
+              <Text className="text-xs text-neutral-600 font-medium">
                 Destination
-              </ThemedText>
-              <ThemedText
-                type="defaultSemiBold"
+              </Text>
+              <Text
                 className="text-sm font-semibold text-neutral-900"
                 numberOfLines={1}
               >
                 {destination}
-              </ThemedText>
+              </Text>
             </View>
           </View>
 
@@ -118,18 +114,12 @@ export default function DirectionsPanel({
                 <MaterialIcons name="navigation" size={16} color="#2563eb" />
               </View>
               <View className="flex-1">
-                <ThemedText
-                  type="default"
-                  className="text-xs text-neutral-600 font-medium"
-                >
+                <Text className="text-xs text-neutral-600 font-medium">
                   Distance
-                </ThemedText>
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-sm font-semibold text-neutral-900"
-                >
+                </Text>
+                <Text className="text-sm font-semibold text-neutral-900">
                   {routeInfo.distanceText}
-                </ThemedText>
+                </Text>
               </View>
             </View>
 
@@ -138,18 +128,12 @@ export default function DirectionsPanel({
                 <MaterialIcons name="access-time" size={16} color="#d97706" />
               </View>
               <View className="flex-1">
-                <ThemedText
-                  type="default"
-                  className="text-xs text-neutral-600 font-medium"
-                >
+                <Text className="text-xs text-neutral-600 font-medium">
                   Duration
-                </ThemedText>
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-sm font-semibold text-neutral-900"
-                >
+                </Text>
+                <Text className="text-sm font-semibold text-neutral-900">
                   {routeInfo.durationText}
-                </ThemedText>
+                </Text>
               </View>
             </View>
           </View>
@@ -173,12 +157,9 @@ export default function DirectionsPanel({
             >
               {/* Step Number */}
               <View className="w-8 h-8 bg-primary-600 rounded-xl flex items-center justify-center">
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-white text-sm font-bold"
-                >
+                <Text className="text-white text-sm font-bold">
                   {index + 1}
-                </ThemedText>
+                </Text>
               </View>
 
               {/* Step Content */}
@@ -189,12 +170,9 @@ export default function DirectionsPanel({
                     size={16}
                     color="#7c3aed"
                   />
-                  <ThemedText
-                    type="defaultSemiBold"
-                    className="text-sm font-semibold text-neutral-900 flex-1"
-                  >
+                  <Text className="text-sm font-semibold text-neutral-900 flex-1">
                     {step.instruction}
-                  </ThemedText>
+                  </Text>
                 </View>
 
                 <View className="flex-row items-center gap-4">
@@ -204,12 +182,9 @@ export default function DirectionsPanel({
                       size={12}
                       color="#6b7280"
                     />
-                    <ThemedText
-                      type="default"
-                      className="text-xs text-neutral-500"
-                    >
+                    <Text className="text-xs text-neutral-500">
                       {formatStepDistance(step.distance)}
-                    </ThemedText>
+                    </Text>
                   </View>
                   <View className="flex-row items-center gap-1">
                     <MaterialIcons
@@ -217,12 +192,9 @@ export default function DirectionsPanel({
                       size={12}
                       color="#6b7280"
                     />
-                    <ThemedText
-                      type="default"
-                      className="text-xs text-neutral-500"
-                    >
+                    <Text className="text-xs text-neutral-500">
                       {Math.round(step.duration / 60)} min
-                    </ThemedText>
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -239,12 +211,9 @@ export default function DirectionsPanel({
             className="flex-row items-center justify-center gap-2 bg-primary-600 py-3 px-4 rounded-2xl"
           >
             <MaterialIcons name="open-in-new" size={16} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white text-sm font-semibold"
-            >
+            <Text className="text-white text-sm font-semibold">
               Open in Maps
-            </ThemedText>
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

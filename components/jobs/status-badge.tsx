@@ -1,7 +1,7 @@
 import { JobStatus } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { ThemedText } from "../themed-text";
+import { Text } from "react-native";
 import { ThemedView } from "../themed-view";
 
 type StatusBadgeProps = {
@@ -81,12 +81,9 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
         size={12}
         color={getStatusIconColor(status)}
       />
-      <ThemedText
-        type="default"
-        className={`text-xs font-medium ${getStatusTextColor(status)}`}
-      >
+      <Text className={`text-xs font-medium ${getStatusTextColor(status)}`}>
         {formatStatus(status)}
-      </ThemedText>
+      </Text>
     </ThemedView>
   );
 }

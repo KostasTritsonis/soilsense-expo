@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import {
   Modal,
   ScrollView,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import { ThemedText } from "../themed-text";
 import { ThemedView } from "../themed-view";
 
 type FieldEditorProps = {
@@ -62,12 +62,7 @@ export default function FieldEditor({
       <ThemedView className="flex-1 bg-white">
         {/* Header */}
         <View className="flex-row items-center justify-between p-4 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-blue-50">
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-xl font-bold text-primary-700"
-          >
-            Edit Field
-          </ThemedText>
+          <Text className="text-xl font-bold text-primary-700">Edit Field</Text>
           <TouchableOpacity
             onPress={onClose}
             className="w-8 h-8 bg-neutral-100 rounded-xl flex items-center justify-center"
@@ -80,12 +75,7 @@ export default function FieldEditor({
           <View className="space-y-6">
             {/* Label Input */}
             <View>
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-neutral-700 text-sm mb-2"
-              >
-                Label
-              </ThemedText>
+              <Text className="text-neutral-700 text-sm mb-2">Label</Text>
               <TextInput
                 value={field.label || ""}
                 onChangeText={(text) => onUpdate(field.id, { label: text })}
@@ -98,12 +88,7 @@ export default function FieldEditor({
 
             {/* Category Selection */}
             <View>
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-neutral-700 text-sm mb-2"
-              >
-                Category
-              </ThemedText>
+              <Text className="text-neutral-700 text-sm mb-2">Category</Text>
               <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -126,8 +111,7 @@ export default function FieldEditor({
                       }`}
                       disabled={field.isUpdating}
                     >
-                      <ThemedText
-                        type="default"
+                      <Text
                         className={`text-sm ${
                           selectedCategory === category
                             ? "text-primary-700 font-semibold"
@@ -135,7 +119,7 @@ export default function FieldEditor({
                         }`}
                       >
                         {category}
-                      </ThemedText>
+                      </Text>
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -144,13 +128,10 @@ export default function FieldEditor({
 
             {/* Color Picker */}
             <View>
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-soil-700 text-sm mb-2 flex-row items-center gap-2"
-              >
+              <Text className="text-soil-700 text-sm mb-2 flex-row items-center gap-2">
                 <MaterialIcons name="palette" size={16} color="#7c3aed" />
                 Color
-              </ThemedText>
+              </Text>
               <View className="flex-row gap-3 flex-wrap">
                 {[
                   "#22c55e", // primary-500
@@ -181,34 +162,21 @@ export default function FieldEditor({
 
             {/* Field Info Display */}
             <View className="p-4 bg-soil-50/80 rounded-2xl">
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-soil-700 text-sm mb-2"
-              >
+              <Text className="text-soil-700 text-sm mb-2">
                 Field Information
-              </ThemedText>
+              </Text>
               <View className="space-y-2">
                 <View className="flex-row justify-between">
-                  <ThemedText type="default" className="text-soil-600">
-                    Area:
-                  </ThemedText>
-                  <ThemedText
-                    type="defaultSemiBold"
-                    className="text-neutral-900"
-                  >
+                  <Text className="text-soil-600">Area:</Text>
+                  <Text className="text-neutral-900 font-semibold">
                     {field.area?.toFixed(2) || 0} m²
-                  </ThemedText>
+                  </Text>
                 </View>
                 <View className="flex-row justify-between">
-                  <ThemedText type="default" className="text-soil-600">
-                    Category:
-                  </ThemedText>
-                  <ThemedText
-                    type="defaultSemiBold"
-                    className="text-neutral-900"
-                  >
+                  <Text className="text-soil-600">Category:</Text>
+                  <Text className="text-neutral-900 font-semibold">
                     {field.categories?.[0]?.type || "Uncategorized"}
-                  </ThemedText>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -217,9 +185,7 @@ export default function FieldEditor({
             {field.isUpdating && (
               <View className="flex-row items-center gap-2 p-3 bg-primary-50 rounded-2xl">
                 <MaterialIcons name="refresh" size={16} color="#7c3aed" />
-                <ThemedText type="default" className="text-primary-600 text-sm">
-                  Saving...
-                </ThemedText>
+                <Text className="text-primary-600 text-sm">Saving...</Text>
               </View>
             )}
           </View>
@@ -242,12 +208,9 @@ export default function FieldEditor({
               disabled={field.isUpdating}
             >
               <MaterialIcons name="save" size={20} color="white" />
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-white font-semibold ml-2"
-              >
+              <Text className="text-white font-semibold ml-2">
                 Update Field
-              </ThemedText>
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -255,12 +218,9 @@ export default function FieldEditor({
               onPress={onClose}
             >
               <MaterialIcons name="close" size={20} color="#6b7280" />
-              <ThemedText
-                type="defaultSemiBold"
-                className="text-neutral-700 font-semibold ml-2"
-              >
+              <Text className="text-neutral-700 font-semibold ml-2">
                 Cancel
-              </ThemedText>
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

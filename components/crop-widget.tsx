@@ -3,9 +3,8 @@ import { useFieldsStore } from "@/lib/stores/fields-store";
 import { Field } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React, { useEffect, useRef, useState } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { PieChart } from "react-native-chart-kit";
-import { ThemedText } from "./themed-text";
 import { ThemedView } from "./themed-view";
 
 interface ChartData {
@@ -87,20 +86,14 @@ export default function CropWidget() {
           <View className="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-2xl flex items-center justify-center">
             <MaterialIcons name="eco" size={20} color="#16a34a" />
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-lg font-semibold text-soil-900 dark:text-neutral-100"
-          >
+          <Text className="text-lg font-semibold text-soil-900 dark:text-neutral-100">
             Crop Distribution
-          </ThemedText>
+          </Text>
         </View>
         <View className="flex-col items-center justify-center py-12">
-          <ThemedText
-            type="default"
-            className="text-soil-500 dark:text-neutral-400"
-          >
+          <Text className="text-soil-500 dark:text-neutral-400">
             No crop data available
-          </ThemedText>
+          </Text>
         </View>
       </ThemedView>
     );
@@ -122,19 +115,13 @@ export default function CropWidget() {
           <View className="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-2xl flex items-center justify-center">
             <MaterialIcons name="eco" size={20} color="#16a34a" />
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-lg font-semibold text-soil-900 dark:text-neutral-100"
-          >
+          <Text className="text-lg font-semibold text-soil-900 dark:text-neutral-100">
             Crop Distribution
-          </ThemedText>
+          </Text>
         </View>
-        <ThemedText
-          type="default"
-          className="text-sm text-soil-500 dark:text-neutral-400 font-medium"
-        >
+        <Text className="text-sm text-soil-500 dark:text-neutral-400 font-medium">
           2025
-        </ThemedText>
+        </Text>
       </View>
 
       <View className="flex-1 flex-col items-center justify-between">
@@ -176,19 +163,13 @@ export default function CropWidget() {
                     className="w-4 h-4 rounded-full flex-shrink-0"
                     style={{ backgroundColor: item.color }}
                   />
-                  <ThemedText
-                    type="default"
-                    className="text-sm text-soil-700 dark:text-neutral-300 font-medium flex-1"
-                  >
+                  <Text className="text-sm text-soil-700 dark:text-neutral-300 font-medium flex-1">
                     {item.category}
-                  </ThemedText>
+                  </Text>
                 </View>
-                <ThemedText
-                  type="defaultSemiBold"
-                  className="text-sm text-soil-900 dark:text-neutral-100 font-semibold ml-2"
-                >
+                <Text className="text-sm text-soil-900 dark:text-neutral-100 font-semibold ml-2">
                   {item.percentage}%
-                </ThemedText>
+                </Text>
               </View>
             ))}
           </View>

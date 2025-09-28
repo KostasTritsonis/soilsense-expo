@@ -1,8 +1,7 @@
 import { Field } from "@/lib/types";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ThemedView } from "../themed-view";
 
 type FieldInfoPanelProps = {
@@ -28,13 +27,12 @@ export default function FieldInfoPanel({
             className="w-4 h-4 rounded-full"
             style={{ backgroundColor: selectedField.color }}
           />
-          <ThemedText
-            type="defaultSemiBold"
+          <Text
             className="text-lg font-bold text-neutral-900 flex-1"
             numberOfLines={1}
           >
             {selectedField.label || "Unnamed Field"}
-          </ThemedText>
+          </Text>
         </View>
         <TouchableOpacity
           onPress={onDeselect}
@@ -50,19 +48,15 @@ export default function FieldInfoPanel({
             <MaterialIcons name="local-offer" size={16} color="#059669" />
           </View>
           <View className="flex-1">
-            <ThemedText
-              type="default"
-              className="text-xs text-neutral-600 font-medium"
-            >
+            <Text className="text-xs text-neutral-600 font-medium">
               Crop Type
-            </ThemedText>
-            <ThemedText
-              type="defaultSemiBold"
+            </Text>
+            <Text
               className="text-sm font-semibold text-neutral-900"
               numberOfLines={1}
             >
               {selectedField.categories?.[0]?.type || "N/A"}
-            </ThemedText>
+            </Text>
           </View>
         </View>
 
@@ -71,18 +65,10 @@ export default function FieldInfoPanel({
             <MaterialIcons name="straighten" size={16} color="#2563eb" />
           </View>
           <View className="flex-1">
-            <ThemedText
-              type="default"
-              className="text-xs text-neutral-600 font-medium"
-            >
-              Area
-            </ThemedText>
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-sm font-semibold text-neutral-900"
-            >
+            <Text className="text-xs text-neutral-600 font-medium">Area</Text>
+            <Text className="text-sm font-semibold text-neutral-900">
               {selectedField.area?.toFixed(2) || 0} m²
-            </ThemedText>
+            </Text>
           </View>
         </View>
       </View>
@@ -97,34 +83,25 @@ export default function FieldInfoPanel({
         {isLoading ? (
           <>
             <MaterialIcons name="refresh" size={16} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white text-sm font-semibold ml-2"
-            >
+            <Text className="text-white text-sm font-semibold ml-2">
               Getting Location...
-            </ThemedText>
+            </Text>
           </>
         ) : (
           <>
             <MaterialIcons name="navigation" size={16} color="white" />
-            <ThemedText
-              type="defaultSemiBold"
-              className="text-white text-sm font-semibold ml-2"
-            >
+            <Text className="text-white text-sm font-semibold ml-2">
               Get Directions
-            </ThemedText>
+            </Text>
           </>
         )}
       </TouchableOpacity>
 
-      <ThemedText
-        type="default"
-        className="text-xs text-neutral-500 mt-3 text-center"
-      >
+      <Text className="text-xs text-neutral-500 mt-3 text-center">
         {hasCustomStartPoint
           ? "Will use your placed start point"
           : "Uses your current location"}
-      </ThemedText>
+      </Text>
     </ThemedView>
   );
 }

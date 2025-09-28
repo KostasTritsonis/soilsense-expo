@@ -1,7 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { View } from "react-native";
-import { ThemedText } from "../themed-text";
+import { Text, View } from "react-native";
 import { ThemedView } from "../themed-view";
 
 type InfoPanelProps = {
@@ -23,73 +22,45 @@ export default function InfoPanel({
         <View className="flex-row items-center justify-between p-2 bg-neutral-50/80 rounded-xl">
           <View className="flex-row items-center gap-2">
             <MaterialIcons name="place" size={16} color="#6b7280" />
-            <ThemedText
-              type="default"
-              className="text-sm text-neutral-600 font-medium"
-            >
+            <Text className="text-sm text-neutral-600 font-medium">
               Longitude
-            </ThemedText>
+            </Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-sm font-semibold text-neutral-900"
-          >
+          <Text className="text-sm font-semibold text-neutral-900">
             {lng.toFixed(4)}
-          </ThemedText>
+          </Text>
         </View>
 
         <View className="flex-row items-center justify-between p-2 bg-neutral-50/80 rounded-xl">
           <View className="flex-row items-center gap-2">
             <MaterialIcons name="place" size={16} color="#6b7280" />
-            <ThemedText
-              type="default"
-              className="text-sm text-neutral-600 font-medium"
-            >
+            <Text className="text-sm text-neutral-600 font-medium">
               Latitude
-            </ThemedText>
+            </Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-sm font-semibold text-neutral-900"
-          >
+          <Text className="text-sm font-semibold text-neutral-900">
             {lat.toFixed(4)}
-          </ThemedText>
+          </Text>
         </View>
 
         <View className="flex-row items-center justify-between p-2 bg-neutral-50/80 rounded-xl">
           <View className="flex-row items-center gap-2">
             <MaterialIcons name="zoom-in" size={16} color="#6b7280" />
-            <ThemedText
-              type="default"
-              className="text-sm text-neutral-600 font-medium"
-            >
-              Zoom
-            </ThemedText>
+            <Text className="text-sm text-neutral-600 font-medium">Zoom</Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-sm font-semibold text-neutral-900"
-          >
+          <Text className="text-sm font-semibold text-neutral-900">
             {zoom.toFixed(2)}
-          </ThemedText>
+          </Text>
         </View>
 
         <View className="flex-row items-center justify-between p-2 bg-neutral-50/80 rounded-xl">
           <View className="flex-row items-center gap-2">
             <MaterialIcons name="straighten" size={16} color="#6b7280" />
-            <ThemedText
-              type="default"
-              className="text-sm text-neutral-600 font-medium"
-            >
-              Area
-            </ThemedText>
+            <Text className="text-sm text-neutral-600 font-medium">Area</Text>
           </View>
-          <ThemedText
-            type="defaultSemiBold"
-            className="text-sm font-semibold text-neutral-900"
-          >
+          <Text className="text-sm font-semibold text-neutral-900">
             {fieldArea.toFixed(2)} m²
-          </ThemedText>
+          </Text>
         </View>
       </View>
     </ThemedView>
