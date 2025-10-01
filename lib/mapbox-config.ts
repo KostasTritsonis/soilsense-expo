@@ -1,14 +1,20 @@
-import Mapbox from "@rnmapbox/maps";
+// Map configuration for react-native-maps
+// No special configuration needed for react-native-maps
+// It uses the default map providers (Google Maps on Android, Apple Maps on iOS)
 
-// Set your Mapbox access token here
-// You can get a free token from https://account.mapbox.com/access-tokens/
-const MAPBOX_ACCESS_TOKEN =
-  "pk.eyJ1Ijoia29zdGFzdHJpIiwiYSI6ImNtNnBmZ3Y2cjE5OTAya3NodGRpc2MwMzgifQ.i1BiNurDcmUx7-HbNIfsjA";
-
-// Initialize Mapbox with the access token
-// Only set the token if it's not already set
-if (!Mapbox.getAccessToken()) {
-  Mapbox.setAccessToken(MAPBOX_ACCESS_TOKEN);
-}
-
-export { MAPBOX_ACCESS_TOKEN };
+export const MAP_CONFIG = {
+  // Default region (San Francisco)
+  defaultRegion: {
+    latitude: 37.7749,
+    longitude: -122.4194,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  },
+  // Map type options
+  mapTypes: {
+    standard: "standard",
+    satellite: "satellite",
+    hybrid: "hybrid",
+    terrain: "terrain",
+  },
+};

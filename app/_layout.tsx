@@ -1,4 +1,4 @@
-import { ClerkProvider } from "@clerk/clerk-expo";
+import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import {
   DarkTheme,
   DefaultTheme,
@@ -6,13 +6,14 @@ import {
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useFieldsStore } from "@/lib/stores/fields-store";
 import { useJobsStore } from "@/lib/stores/jobs-store";
 import { ThemeProvider as CustomThemeProvider } from "@/lib/theme-context";
-import { useEffect } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import "../global.css";
 
 export const unstable_settings = {
@@ -21,6 +22,7 @@ export const unstable_settings = {
 
 function AppContent() {
   const colorScheme = useColorScheme();
+  const { isSignedIn, isLoaded } = useAuth();
   const { initializeData: initializeFields } = useFieldsStore();
   const { initializeData: initializeJobs } = useJobsStore();
 
@@ -38,10 +40,33 @@ function AppContent() {
     initializeApp();
   }, [initializeFields, initializeJobs]);
 
+  // Show loading while Clerk is initializing
+  if (!isLoaded) {
+    return null;
+  }
+
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        {isSignedIn ? (
+          <>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="profile"
+              options={{
+                presentation: "modal",
+                headerShown: false,
+                animationTypeForReplace: "push",
+                animation: "slide_from_bottom",
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="sign-in" />
+            <Stack.Screen name="sign-up" />
+          </>
+        )}
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
@@ -50,14 +75,16 @@ function AppContent() {
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <ClerkProvider
-        publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
-      >
-        <CustomThemeProvider>
-          <AppContent />
-        </CustomThemeProvider>
-      </ClerkProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <ClerkProvider
+          publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
+        >
+          <CustomThemeProvider>
+            <AppContent />
+          </CustomThemeProvider>
+        </ClerkProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

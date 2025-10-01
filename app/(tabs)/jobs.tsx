@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import JobsCalendar from "@/components/jobs/jobs-calendar";
 import JobForm from "@/components/jobs/jobs-form";
 import JobsTable from "@/components/jobs/jobs-table";
@@ -52,6 +53,7 @@ export default function JobsScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-earth-50 dark:bg-neutral-900">
+      <Header />
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="py-6 items-center">

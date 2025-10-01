@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import { ThemedView } from "@/components/themed-view";
 import { useWeatherStore } from "@/lib/stores/weather-store";
 import { CurrentWeather, ForecastDay } from "@/lib/types";
@@ -125,6 +126,7 @@ export default function WeatherScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-neutral-900">
+      <Header />
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="py-6 items-center">

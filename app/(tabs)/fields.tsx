@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import MapComponent from "@/components/map/map";
 import { useFieldsStore } from "@/lib/stores/fields-store";
 import { Field } from "@/lib/types";
@@ -51,6 +52,7 @@ export default function FieldsScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-earth-50">
+      <Header />
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="py-6 items-center">

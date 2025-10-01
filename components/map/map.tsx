@@ -126,6 +126,7 @@ export default function MapComponent() {
           }}
           showsUserLocation={true}
           showsMyLocationButton={true}
+          onPress={handleDeselect}
         >
           {/* Field annotations */}
           {fields.map((field) => (

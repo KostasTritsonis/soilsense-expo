@@ -1,16 +1,7 @@
 import { useUser } from "@clerk/clerk-expo";
-import { router } from "expo-router";
-import { useEffect } from "react";
 
 export default function useGetUser() {
   const { user, isLoaded } = useUser();
-
-  useEffect(() => {
-    if (isLoaded && !user) {
-      // Navigate to the main tabs instead of a non-existent sign-in route
-      router.replace("/(tabs)");
-    }
-  }, [isLoaded, user]);
 
   if (!isLoaded) {
     return null;
