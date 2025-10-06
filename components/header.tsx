@@ -1,4 +1,6 @@
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useFieldsStore } from "@/lib/stores/fields-store";
+import { useJobsStore } from "@/lib/stores/jobs-store";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -11,6 +13,8 @@ export default function Header() {
   const colorScheme = useColorScheme();
   const { user, isLoaded } = useUser();
   const { signOut, isSignedIn } = useAuth();
+  const { clearData: clearFieldsData } = useFieldsStore();
+  const { clearData: clearJobsData } = useJobsStore();
 
   // Debug logging
   console.log("Header Debug:", {
@@ -22,6 +26,13 @@ export default function Header() {
 
   const handleSignOut = async () => {
     try {
+      console.log("🚪 Signing out user...");
+
+      // Clear all app data before signing out
+      clearFieldsData();
+      clearJobsData();
+
+      console.log("✅ App data cleared, signing out...");
       await signOut();
     } catch (error) {
       console.error("Error signing out:", error);

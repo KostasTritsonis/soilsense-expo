@@ -51,7 +51,9 @@
     "extra": {
       "eas": {
         "projectId": "e0732ab3-b574-4495-a210-b46c58e41d4c"
-      }
+      },
+      "supabaseUrl": "https://sitjnzchdcqwjbjjvbzd.supabase.co",
+      "supabaseAnonKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpdGpuemNoZGNxd2piamp2YnpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3NDY2NzgsImV4cCI6MjA3NTMyMjY3OH0.lo0Btwo-27MipGQYdlAXi43FIln0ZVqCUF6FmcTc4vE"
     },
     "runtimeVersion": {
       "policy": "appVersion"

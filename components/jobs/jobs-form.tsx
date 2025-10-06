@@ -1,6 +1,7 @@
 import { useLoadingStore } from "@/lib/loading-store";
 import { useJobsStore } from "@/lib/stores/jobs-store";
 import { JobFormData } from "@/lib/types";
+import { useUser } from "@clerk/clerk-expo";
 import React, { useState } from "react";
 import {
   ScrollView,
@@ -20,6 +21,7 @@ export default function JobForm({ onCancel }: JobFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { users, addJob } = useJobsStore();
   const { setJobsLoading } = useLoadingStore();
+  const { user } = useUser();
   const [formData, setFormData] = useState<JobFormData>({
     title: "",
     description: "",
@@ -41,13 +43,17 @@ export default function JobForm({ onCancel }: JobFormProps) {
   };
 
   const handleSubmit = async () => {
+    if (!user?.id) {
+      console.error("User not authenticated");
+      return;
+    }
+
     setIsSubmitting(true);
     setJobsLoading(true);
 
     try {
-      // Create new job object
+      // Create new job object (without id, createdAt, updatedAt - these will be handled by Supabase)
       const newJob = {
-        id: Date.now().toString(), // Simple ID generation
         title: formData.title,
         description: formData.description,
         status: formData.status,
@@ -56,12 +62,15 @@ export default function JobForm({ onCancel }: JobFormProps) {
         location: formData.location || null,
         assignedToId: formData.assignedToId || null,
         assignedTo: users.find((u) => u.id === formData.assignedToId) || null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       };
 
-      // Add to jobs list
-      addJob(newJob);
+      // Add to jobs list with user ID
+      const result = await addJob(newJob, user.id);
+
+      if (!result.success) {
+        console.error("Failed to create job:", result.error);
+        return;
+      }
 
       // Reset form and close
       setFormData({

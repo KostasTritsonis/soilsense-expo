@@ -1,3 +1,4 @@
+import { jobsApi, usersApi } from "@/lib/supabase-api";
 import { Job, User } from "@/lib/types";
 import { create } from "zustand";
 
@@ -15,12 +16,21 @@ interface JobsState {
   setIsInitialized: (initialized: boolean) => void;
 
   // Job actions
-  addJob: (job: Job) => void;
-  updateJob: (id: string, updates: Partial<Job>) => void;
-  deleteJob: (id: string) => void;
+  addJob: (
+    job: Omit<Job, "id" | "createdAt" | "updatedAt">,
+    userId: string
+  ) => Promise<{ success: boolean; error?: string }>;
+  updateJob: (
+    id: string,
+    updates: Partial<Job>
+  ) => Promise<{ success: boolean; error?: string }>;
+  deleteJob: (id: string) => Promise<{ success: boolean; error?: string }>;
 
-  // Initialize with mock data
-  initializeData: () => Promise<void>;
+  // Initialize with Supabase data
+  initializeData: (userId: string) => Promise<void>;
+
+  // Clear all data (for sign out)
+  clearData: () => void;
 }
 
 export const useJobsStore = create<JobsState>((set, get) => ({
@@ -37,79 +47,94 @@ export const useJobsStore = create<JobsState>((set, get) => ({
   setIsInitialized: (isInitialized) => set({ isInitialized }),
 
   // Job actions
-  addJob: (job) => {
-    const { jobs } = get();
-    set({ jobs: [...(jobs || []), job] });
+  addJob: async (job, userId) => {
+    try {
+      const newJob = await jobsApi.createJob(job, userId);
+      const { jobs } = get();
+      set({ jobs: [...(jobs || []), newJob] });
+      return { success: true };
+    } catch (error) {
+      console.error("Error adding job:", error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to add job",
+      };
+    }
   },
 
-  updateJob: (id, updates) => {
-    const { jobs } = get();
-    if (!jobs) return;
+  updateJob: async (id, updates) => {
+    try {
+      const updatedJob = await jobsApi.updateJob(id, updates);
+      const { jobs } = get();
+      if (!jobs) return { success: false, error: "No jobs available" };
 
-    const updatedJobs = jobs.map((job) =>
-      job.id === id ? { ...job, ...updates } : job
-    );
-    set({ jobs: updatedJobs });
+      const updatedJobs = jobs.map((job) => (job.id === id ? updatedJob : job));
+      set({ jobs: updatedJobs });
+      return { success: true };
+    } catch (error) {
+      console.error("Error updating job:", error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to update job",
+      };
+    }
   },
 
-  deleteJob: (id) => {
-    const { jobs } = get();
-    if (!jobs) return;
+  deleteJob: async (id) => {
+    try {
+      await jobsApi.deleteJob(id);
+      const { jobs } = get();
+      if (!jobs) return { success: false, error: "No jobs available" };
 
-    const filteredJobs = jobs.filter((job) => job.id !== id);
-    set({ jobs: filteredJobs });
+      const filteredJobs = jobs.filter((job) => job.id !== id);
+      set({ jobs: filteredJobs });
+      return { success: true };
+    } catch (error) {
+      console.error("Error deleting job:", error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to delete job",
+      };
+    }
   },
 
-  // Initialize with mock data
-  initializeData: async () => {
+  // Initialize with Supabase data
+  initializeData: async (userId: string) => {
     set({ isLoading: true });
 
     try {
-      // Mock data - replace with actual API calls
-      const mockJobs: Job[] = [
-        {
-          id: "1",
-          title: "Planting Wheat",
-          description: "Plant wheat seeds in North Field",
-          status: "ONGOING",
-          startDate: new Date("2024-01-15"),
-          endDate: new Date("2024-01-20"),
-          location: "North Field",
-          createdAt: new Date("2024-01-10"),
-          updatedAt: new Date("2024-01-10"),
-        },
-        {
-          id: "2",
-          title: "Harvest Corn",
-          description: "Harvest corn from South Field",
-          status: "DUE",
-          startDate: new Date("2024-02-01"),
-          endDate: new Date("2024-02-05"),
-          location: "South Field",
-          createdAt: new Date("2024-01-10"),
-          updatedAt: new Date("2024-01-10"),
-        },
-      ];
-
-      const mockUsers: User[] = [
-        {
-          id: "1",
-          name: "John Farmer",
-          email: "john@example.com",
-        },
-      ];
+      const [jobs, users] = await Promise.all([
+        jobsApi.getJobs(userId),
+        usersApi.getUsers(),
+      ]);
 
       set({
-        jobs: mockJobs,
-        users: mockUsers,
+        jobs,
+        users,
         isInitialized: true,
       });
 
-      console.log("JobsStore: Data loaded successfully");
+      console.log("JobsStore: Data loaded successfully from Supabase");
     } catch (error) {
       console.error("Error fetching jobs data:", error);
+      set({
+        jobs: [],
+        users: [],
+        isInitialized: true,
+      });
     } finally {
       set({ isLoading: false });
     }
+  },
+
+  // Clear all data (for sign out)
+  clearData: () => {
+    console.log("🧹 Clearing jobs data");
+    set({
+      jobs: undefined,
+      users: undefined,
+      isLoading: false,
+      isInitialized: false,
+    });
   },
 }));

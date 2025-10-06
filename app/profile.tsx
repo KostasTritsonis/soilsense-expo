@@ -1,3 +1,4 @@
+import { useDismissModal } from "@/hooks/use-dismiss-modal";
 import { useUser } from "@clerk/clerk-expo";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -20,12 +21,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
   const { user, isLoaded } = useUser();
+  const { dismissModal } = useDismissModal();
   const translateY = useSharedValue(0);
   const opacity = useSharedValue(1);
-
-  const dismissModal = React.useCallback(() => {
-    router.dismiss();
-  }, []);
 
   const panGesture = Gesture.Pan()
     .onUpdate((event) => {

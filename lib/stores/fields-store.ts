@@ -1,3 +1,4 @@
+import { fieldsApi } from "@/lib/supabase-api";
 import { Field } from "@/lib/types";
 import { create } from "zustand";
 
@@ -15,15 +16,20 @@ interface FieldsState {
   setIsInitialized: (initialized: boolean) => void;
 
   // Field actions
-  addField: (field: Field) => Promise<{ success: boolean; error?: string }>;
+  addField: (
+    field: Omit<Field, "id" | "isUpdating">
+  ) => Promise<{ success: boolean; error?: string }>;
   updateField: (
     id: string,
     updates: Partial<Field>
   ) => Promise<{ success: boolean; error?: string }>;
   deleteField: (id: string) => Promise<{ success: boolean; error?: string }>;
 
-  // Initialize with mock data
-  initializeData: () => Promise<void>;
+  // Initialize with Supabase data
+  initializeData: (userId: string) => Promise<void>;
+
+  // Clear all data (for sign out)
+  clearData: () => void;
 }
 
 export const useFieldsStore = create<FieldsState>((set, get) => ({
@@ -42,8 +48,9 @@ export const useFieldsStore = create<FieldsState>((set, get) => ({
   // Field actions
   addField: async (field) => {
     try {
+      const newField = await fieldsApi.createField(field);
       const { fields } = get();
-      set({ fields: [...fields, field] });
+      set({ fields: [...fields, newField] });
       return { success: true };
     } catch (error) {
       console.error("Error adding field:", error);
@@ -56,9 +63,10 @@ export const useFieldsStore = create<FieldsState>((set, get) => ({
 
   updateField: async (id, updates) => {
     try {
+      const updatedField = await fieldsApi.updateField(id, updates);
       const { fields } = get();
       const updatedFields = fields.map((field) =>
-        field.id === id ? { ...field, ...updates } : field
+        field.id === id ? updatedField : field
       );
       set({ fields: updatedFields });
       return { success: true };
@@ -74,6 +82,7 @@ export const useFieldsStore = create<FieldsState>((set, get) => ({
 
   deleteField: async (id) => {
     try {
+      await fieldsApi.deleteField(id);
       const { fields } = get();
       const filteredFields = fields.filter((field) => field.id !== id);
       set({ fields: filteredFields });
@@ -88,53 +97,18 @@ export const useFieldsStore = create<FieldsState>((set, get) => ({
     }
   },
 
-  // Initialize with mock data
-  initializeData: async () => {
+  // Initialize with Supabase data
+  initializeData: async (userId: string) => {
     set({ isLoading: true });
 
     try {
-      // Mock data for now
-      const mockFields: Field[] = [
-        {
-          id: "field-1",
-          color: "#3b82f6",
-          area: 2.5,
-          label: "North Field",
-          coordinates: [
-            [
-              [37.7749, -122.4194],
-              [37.7849, -122.4094],
-              [37.7849, -122.4294],
-              [37.7749, -122.4194],
-            ],
-          ],
-          authorId: "mock-user-id",
-          categories: [{ id: "cat-wheat", type: "Wheat" }],
-        },
-        {
-          id: "field-2",
-          color: "#10b981",
-          area: 1.8,
-          label: "South Field",
-          coordinates: [
-            [
-              [37.7649, -122.4094],
-              [37.7749, -122.3994],
-              [37.7749, -122.4194],
-              [37.7649, -122.4094],
-            ],
-          ],
-          authorId: "mock-user-id",
-          categories: [{ id: "cat-corn", type: "Corn" }],
-        },
-      ];
-
+      const fields = await fieldsApi.getFields(userId);
       set({
-        fields: mockFields,
+        fields,
         isInitialized: true,
       });
 
-      console.log("FieldsStore: Mock data loaded successfully");
+      console.log("FieldsStore: Data loaded successfully from Supabase");
     } catch (error) {
       console.error("Error initializing fields data:", error);
       set({
@@ -144,5 +118,16 @@ export const useFieldsStore = create<FieldsState>((set, get) => ({
     } finally {
       set({ isLoading: false });
     }
+  },
+
+  // Clear all data (for sign out)
+  clearData: () => {
+    console.log("🧹 Clearing fields data");
+    set({
+      fields: [],
+      tempFields: [],
+      isLoading: false,
+      isInitialized: false,
+    });
   },
 }));

@@ -97,6 +97,7 @@ export type Job = {
     name: string;
     email: string;
   } | null;
+  userId?: string; // Add userId for Supabase integration
   createdAt: Date;
   updatedAt: Date;
 };

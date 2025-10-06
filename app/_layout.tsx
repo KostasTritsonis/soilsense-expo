@@ -1,4 +1,4 @@
-import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
+import { ClerkProvider, useAuth, useUser } from "@clerk/clerk-expo";
 import {
   DarkTheme,
   DefaultTheme,
@@ -14,6 +14,7 @@ import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useFieldsStore } from "@/lib/stores/fields-store";
 import { useJobsStore } from "@/lib/stores/jobs-store";
 import { ThemeProvider as CustomThemeProvider } from "@/lib/theme-context";
+import { userManagement } from "@/lib/user-management";
 import "../global.css";
 
 export const unstable_settings = {
@@ -23,22 +24,52 @@ export const unstable_settings = {
 function AppContent() {
   const colorScheme = useColorScheme();
   const { isSignedIn, isLoaded } = useAuth();
-  const { initializeData: initializeFields } = useFieldsStore();
-  const { initializeData: initializeJobs } = useJobsStore();
+  const { user } = useUser();
+  const { initializeData: initializeFields, clearData: clearFieldsData } =
+    useFieldsStore();
+  const { initializeData: initializeJobs, clearData: clearJobsData } =
+    useJobsStore();
 
   useEffect(() => {
     const initializeApp = async () => {
       try {
-        // Initialize stores
-        initializeFields();
-        initializeJobs();
+        if (isSignedIn && user?.id) {
+          console.log("🚀 Initializing app for user:", user.id);
+
+          // First, ensure user exists in database
+          const dbUser = await userManagement.ensureUserExists(user);
+
+          if (dbUser) {
+            console.log("✅ User ready in database:", dbUser.name);
+
+            // Initialize stores with user ID
+            await initializeFields(user.id);
+            await initializeJobs(user.id);
+
+            console.log("✅ App initialization complete");
+          } else {
+            console.error("❌ Failed to ensure user exists in database");
+          }
+        }
       } catch (error) {
         console.error("❌ Failed to initialize app:", error);
       }
     };
 
-    initializeApp();
-  }, [initializeFields, initializeJobs]);
+    if (isLoaded) {
+      initializeApp();
+    }
+  }, [initializeFields, initializeJobs, isSignedIn, user, isLoaded]);
+
+  // Handle sign out - clear data when user signs out
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      console.log("🚪 User signed out, clearing app data...");
+      clearFieldsData();
+      clearJobsData();
+      console.log("✅ App data cleared after sign out");
+    }
+  }, [isLoaded, isSignedIn, clearFieldsData, clearJobsData]);
 
   // Show loading while Clerk is initializing
   if (!isLoaded) {
